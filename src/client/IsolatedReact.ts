@@ -1,4 +1,10 @@
-import type * as React from "react";
+import type { useMemo, useEffect, useCallback } from "react";
+
+type React = {
+    useMemo: typeof useMemo,
+    useEffect: typeof useEffect,
+    useCallback: typeof useCallback,
+};
 
 export const IsolatedReact = (React: React) => ({
     useMemo<const TDeps extends readonly unknown[], TResult>(
