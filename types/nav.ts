@@ -16,6 +16,12 @@ type ClientCode = "AAI" | "LAL" | "F2R" | `${AlphaNum}${AlphaNum}${AlphaNum}`;
 const CompanyNameTag = Symbol("CompanyName");
 type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${PartnerCompanyCode} - ${ClientCode}${CurrencyIsoCode | string}`;
 export type CompanyName = Brand<CompanyNameLiteral, typeof CompanyNameTag>;
+export const CompanyName = (value: string): CompanyName => {
+    if (!value.match(/^\w+\s*-\s*\w+$/)) {
+        throw new Error("Supplied COMPANYNAME has invalid format");
+    }
+    return value as CompanyName;
+};
 export type COMPANYNAME = UpperCased<CompanyName>;
 
 /**
