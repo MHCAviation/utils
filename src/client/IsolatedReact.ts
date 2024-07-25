@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo } from "react";
+import type * as React from "react";
 
-export const IsolatedReact = {
+export const IsolatedReact = (React: React) => ({
     useMemo<const TDeps extends readonly unknown[], TResult>(
         computer: (...deps: readonly [...TDeps]) => TResult,
         dependencies: TDeps
     ) {
-        return useMemo(() => {
+        return React.useMemo(() => {
             return computer(...dependencies);
         }, dependencies);
     },
@@ -13,7 +13,7 @@ export const IsolatedReact = {
         computer: (...deps: readonly [...TDeps]) => void,
         dependencies: TDeps
     ) {
-        return useEffect(() => {
+        return React.useEffect(() => {
             computer(...dependencies);
         }, dependencies);
     },
@@ -24,8 +24,8 @@ export const IsolatedReact = {
         computer: (...deps: readonly [...TDeps]) => (...args: readonly [...TArgs]) => void,
         dependencies: TDeps
     ) {
-        return useCallback((...args: TArgs) => {
+        return React.useCallback((...args: TArgs) => {
             computer(...dependencies)(...args);
         }, dependencies);
     },
-};
+});
