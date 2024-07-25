@@ -79,6 +79,17 @@ export function incrementMonth({ year, month }: AbsoluteMonth) {
     };
 }
 
+export function incrementDay(date: IsoDate): IsoDate {
+    const dateObj = new Date(date);
+    dateObj.setUTCDate(dateObj.getUTCDate() + 1);
+    return getDatePart(dateObj);
+}
+
+/** 0 = Sunday */
+export function getWeekDayName(weekDay: number) {
+    return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][weekDay];
+}
+
 export function getMonthShortName(month: number) {
     return [
         "Jan", "Feb", "Mar", "Apr",
