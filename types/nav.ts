@@ -14,7 +14,8 @@ type PartnerCompanyCode = "F2R" | "HEL" | "D2W" | "APM" | `${AlphaNum}${AlphaNum
 type ClientCode = "AAI" | "LAL" | "F2R" | `${AlphaNum}${AlphaNum}${AlphaNum}`;
 
 const CompanyNameTag = Symbol("CompanyName");
-export type CompanyName = Brand<"Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${PartnerCompanyCode} - ${ClientCode}${CurrencyIsoCode}`, typeof CompanyNameTag>;
+type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${PartnerCompanyCode} - ${ClientCode}${CurrencyIsoCode | string}`;
+export type CompanyName = Brand<CompanyNameLiteral, typeof CompanyNameTag>;
 export type COMPANYNAME = UpperCased<CompanyName>;
 
 /**
