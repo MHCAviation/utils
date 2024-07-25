@@ -1,0 +1,11 @@
+{
+    "name": "@mhc/utils",
+    "author": "MHC Aviation Dev Team",
+    "description": "We'll put here all reusable typescript code that would be of use to us in both nodejs and browser environments. Stuff like type definitions, helper functions for working with dates, fetch() wrapper, etc...",
+    "license": "proprietary",
+    "repository": {
+        "type": "git",
+        "url": "ssh://git@github.com:MHCAviation/utils.git"
+    },
+    "version": "0.0.1"
+}
