@@ -1,4 +1,15 @@
 
+export type Entry<T> = {
+    [K in keyof T]: [K, T[K]];
+}[keyof T];
+
+export type Key<T> = {
+    [K in keyof T]: K;
+}[keyof T];
+
+export type Entries<T> = NonNullable<Entry<T>>[];
+export type Keys<T> = NonNullable<Key<T>>[];
+
 /** @see https://stackoverflow.com/a/49260286/2750743 */
 export type Brand<TBase, Tag extends symbol> = TBase & { __tag: Tag };
 export type Unbrand<TBranded extends { __tag: symbol }> = Omit<TBranded, "__tag">;
@@ -17,6 +28,15 @@ export interface JsonObject<TExtra = never> {
 }
 
 export type EmailAddress = `${string}@${string}.${string}`;
+export const EmailAddress = (value: string): EmailAddress => {
+    const match = value.match(/^(\S+)@(\S+).(\S+)$/);
+    if (!match) {
+        throw new Error("Invalid E-Mail Address format: " + value);
+    }
+    const [, username, hostname, country] = match;
+    return `${username}@${hostname}.${country}`;
+};
+
 const Base64Tag = Symbol("Base64");
 export type Base64 = Brand<string, typeof Base64Tag>;
 
