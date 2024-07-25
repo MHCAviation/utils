@@ -1,11 +1,23 @@
 {
     "name": "@mhc/utils",
+    "version": "0.0.1",
     "author": "MHC Aviation Dev Team",
     "description": "We'll put here all reusable typescript code that would be of use to us in both nodejs and browser environments. Stuff like type definitions, helper functions for working with dates, fetch() wrapper, etc...",
     "license": "proprietary",
+    "type": "module",
     "repository": {
         "type": "git",
         "url": "ssh://git@github.com:MHCAviation/utils.git"
     },
-    "version": "0.0.1"
+    "scripts": {
+        "test": "npx tsc && npx eslint **/*.ts"
+    },
+    "devDependencies": {
+        "typescript": "^5.2.2",
+        "eslint": "8.22.0",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-unused-imports": "^3.0.0",
+        "@typescript-eslint/eslint-plugin": "^6.7.4",
+        "@typescript-eslint/parser": "^6.7.4"
+    }
 }
