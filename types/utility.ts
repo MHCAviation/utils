@@ -29,7 +29,7 @@ export interface JsonObject<TExtra = never> {
 
 export type EmailAddress = `${string}@${string}.${string}`;
 export const EmailAddress = (value: string): EmailAddress => {
-    const match = value.match(/^(\S+)@(\S+).(\S+)$/);
+    const match = value.match(/^(\S+)@(\S+)\.(\S+)$/);
     if (!match) {
         throw new Error("Invalid E-Mail Address format: " + value);
     }
