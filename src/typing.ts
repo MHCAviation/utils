@@ -1,4 +1,4 @@
-import type { Brand,Entries,Keys, Unbrand } from "../types/utility";
+import type { Brand,Entries,JsonValue,Keys, Unbrand } from "../types/utility";
 
 export const typed = <T,>(v: T) => v;
 
@@ -37,6 +37,15 @@ export const brand = <TBranded extends Brand<unknown, symbol>>(value: Unbrand<TB
  */
 export function neverNull(message?: string): never {
     throw new TypeError("Unexpected null value" + (!message ? "" : " " + message));
+}
+
+/**
+ * no-unsafe-* eslint rule really hates JSON.parse() and for a reason I guess
+ * this helper function is a slightly type-safer alternative
+ */
+export function parseJson<T extends JsonValue = JsonValue>(jsonStr: string): T {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return JSON.parse(jsonStr);
 }
 
 export function getTypeName(value: unknown) {

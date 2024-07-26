@@ -37,6 +37,9 @@ export const EmailAddress = (value: string): EmailAddress => {
     return `${username}@${hostname}.${country}`;
 };
 
+export type HttpUrl = `http${"s" | ""}://${string}.${string}`;
+export type Pathname = `/${string}`;
+
 const Base64Tag = Symbol("Base64");
 export type Base64 = Brand<string, typeof Base64Tag>;
 
