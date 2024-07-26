@@ -1,4 +1,4 @@
-import type { IsoDate, Brand } from "../../utility";
+import type { IsoDate, Brand,IataAirport } from "../../utility";
 import type { CrewCode } from "../../nav";
 
 const HumanResourceUniqueIdTag = Symbol("HumanResourceUniqueId");
@@ -7,7 +7,7 @@ export type HumanResourceUniqueId = Brand<number, typeof HumanResourceUniqueIdTa
 export type Crew = {
     "Active": true,
     "UniqueId": HumanResourceUniqueId,
-    "Number": "GUHL",
+    "Number": CrewCode,
     "Code1": "18201",
     "Code2": "68270",
     "Firstname": "GUENTER",
@@ -43,10 +43,10 @@ export type RosterActivity = {
     "ActivityType": "REFERENCEACTIVITY" | "FLIGHT",
     "ActivitySubType": "" | "Unknown" | "Transport" | "Hotel" | "StandBy" | "DayOff" | "Illness" | "Vacation" | "Shift" | "Training" | "Simulator",
     "ActivityCode": "SV5501" | "FLT" | "GT" | "HSV" | "SBN" | "SBA" | "OFF" | "ILL" | "CFD" | "SBD" | "EML" | "8h" | "VAU" | "AV7" | "AV4" | "SCO" | "SV5461" | "SV4461" | "GTD" | "HTN" | "HTM" | "R14" | "DUT" | "CBO" | "HTL" | "S74" | "12h" | "APP" | "VAC" | "POT" | "DLRP" | "ULV" | "RLO" | "LMD" | "LEE" | "COU" | "NTS" | "PXP" | "CRM" | "DGR" | "AID" | "R12" | "ET4" | "ROF" | "WBB" | "OFN" | "SW" | "EA4" | "S77",
-    "StartAirportCode": "BKK",
-    "EndAirportCode": "RUH",
-    "Start": "2024-06-08T08:25:00Z",
-    "End": "2024-06-08T15:55:00Z",
+    "StartAirportCode": IataAirport,
+    "EndAirportCode": IataAirport,
+    "Start": IsoDate,
+    "End": IsoDate,
     "StartLocalTimeDiff": 420,
     "EndLocalTimeDiff": 180,
     "StartBaseTimeDiff": 420,
