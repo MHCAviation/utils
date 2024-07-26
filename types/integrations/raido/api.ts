@@ -1,4 +1,4 @@
-import type { IsoDate, Brand,IataAirport } from "../../utility";
+import type { IsoDate, Brand,IataAirport,IsoDateTime } from "../../utility";
 import type { CrewCode } from "../../nav";
 
 const HumanResourceUniqueIdTag = Symbol("HumanResourceUniqueId");
@@ -45,8 +45,8 @@ export type RosterActivity = {
     "ActivityCode": "SV5501" | "FLT" | "GT" | "HSV" | "SBN" | "SBA" | "OFF" | "ILL" | "CFD" | "SBD" | "EML" | "8h" | "VAU" | "AV7" | "AV4" | "SCO" | "SV5461" | "SV4461" | "GTD" | "HTN" | "HTM" | "R14" | "DUT" | "CBO" | "HTL" | "S74" | "12h" | "APP" | "VAC" | "POT" | "DLRP" | "ULV" | "RLO" | "LMD" | "LEE" | "COU" | "NTS" | "PXP" | "CRM" | "DGR" | "AID" | "R12" | "ET4" | "ROF" | "WBB" | "OFN" | "SW" | "EA4" | "S77",
     "StartAirportCode": IataAirport,
     "EndAirportCode": IataAirport,
-    "Start": IsoDate,
-    "End": IsoDate,
+    "Start": IsoDateTime,
+    "End": IsoDateTime,
     "StartLocalTimeDiff": 420,
     "EndLocalTimeDiff": 180,
     "StartBaseTimeDiff": 420,
