@@ -54,7 +54,7 @@ export type IsoDate = "2024-07-16" | "2024-03-13" | `${MonthStr}-${Pad2}`;
 
 type SecondFraction = "" | `.${number}`;
 type IsoTime = "23:59:59" | "00:00:00.1234" | `${number}:${number}:${number}${SecondFraction}`;
-type IsoDateTimeBase<TTimeZoneOffset extends string> = `${IsoDate}T${IsoTime}${TTimeZoneOffset}`;
+export type IsoDateTimeBase<TTimeZoneOffset extends string> = `${IsoDate}T${IsoTime}${TTimeZoneOffset}`;
 /** as serialized from C# System.DateTime by Newtonsoft.Json */
 export type IsoDateTime = IsoDateTimeBase<"" | "Z">;
 export type IsoDateTimeOffset = IsoDateTimeBase<`${"+" | "-"}${number}${"" | `:${Pad2}`}}`>;

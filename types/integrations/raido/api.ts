@@ -1,4 +1,4 @@
-import type { IsoDate, Brand,IataAirport,IsoDateTime } from "../../utility";
+import type { IsoDate, Brand,IataAirport,IsoDateTime,IsoDateTimeBase } from "../../utility";
 import type { CrewCode } from "../../nav";
 
 const HumanResourceUniqueIdTag = Symbol("HumanResourceUniqueId");
@@ -26,26 +26,30 @@ export type Crew = {
     "DateOfBirth": "1966-03-25T00:00:00Z",
 };
 
-/** @see https://aai-apim-dev-northeu-01.developer.azure-api.net/api-details#api=abd-uat-rest-v1&operation=Roster_GetRosters&definition=RosterActivity */
-export type RosterActivity = {
+type FlightNumber = "SV4461" | "SV5501" | "SV5461" | "SV4418" | `${string}${number}`;
+type GroundActivityCode = "FLT" | "GT" | "HSV" | "SBN" | "SBA" | "OFF" | "ILL" | "CFD" | "SBD" | "EML" | "8h" | "VAU" | "AV7" | "AV4" | "SCO" | "GTD" | "HTN" | "HTM" | "R14" | "DUT" | "CBO" | "HTL" | "S74" | "12h" | "APP" | "VAC" | "POT" | "DLRP" | "ULV" | "RLO" | "LMD" | "LEE" | "COU" | "NTS" | "PXP" | "CRM" | "DGR" | "AID" | "R12" | "ET4" | "ROF" | "WBB" | "OFN" | "SW" | "EA4" | "S77";
+
+type RosterActivityBase = {
     "AssignedRank": "SC" | "CC" | "G2" | "OF" | "FO" | "CP" | "MX" | "LM",
     "PairingId": 0,
     /** seems to always be empty */
     "PairingName": "",
-    "Code": "SV5501" | "FLT" | "GT" | "HSV" | "SBN" | "SBA" | "OFF" | "ILL" | "CFD" | "SBD" | "EML" | "8h" | "VAU" | "AV7" | "AV4" | "SCO" | "SV5461" | "SV4461" | "GTD" | "HTN" | "HTM" | "R14" | "DUT" | "CBO" | "HTL" | "S74" | "12h" | "APP" | "VAC" | "POT" | "DLRP" | "ULV" | "RLO" | "LMD" | "LEE" | "COU" | "NTS" | "PXP" | "CRM" | "DGR" | "AID" | "R12" | "ET4" | "ROF" | "WBB" | "OFN" | "SW" | "EA4" | "S77",
+    "Code": FlightNumber | GroundActivityCode,
     "RefUniqueId": 109,
     "SftFASTActType": "Work" | "" | "Crewing",
-    /** appears to always be false, probably because it's testing environment */
+    /** appears to always be false, probably because it's historical data copied from RM */
     "Confirmed": false,
     /** appears to always be false */
     "IsCarryOverActivity": false,
     "UniqueId": 898671,
     "ActivityType": "REFERENCEACTIVITY" | "FLIGHT",
     "ActivitySubType": "" | "Unknown" | "Transport" | "Hotel" | "StandBy" | "DayOff" | "Illness" | "Vacation" | "Shift" | "Training" | "Simulator",
-    "ActivityCode": "SV5501" | "FLT" | "GT" | "HSV" | "SBN" | "SBA" | "OFF" | "ILL" | "CFD" | "SBD" | "EML" | "8h" | "VAU" | "AV7" | "AV4" | "SCO" | "SV5461" | "SV4461" | "GTD" | "HTN" | "HTM" | "R14" | "DUT" | "CBO" | "HTL" | "S74" | "12h" | "APP" | "VAC" | "POT" | "DLRP" | "ULV" | "RLO" | "LMD" | "LEE" | "COU" | "NTS" | "PXP" | "CRM" | "DGR" | "AID" | "R12" | "ET4" | "ROF" | "WBB" | "OFN" | "SW" | "EA4" | "S77",
+    "ActivityCode": FlightNumber | GroundActivityCode,
     "StartAirportCode": IataAirport,
     "EndAirportCode": IataAirport,
+    /** planned time, not to be used for block hours calculation */
     "Start": IsoDateTime,
+    /** planned time, not to be used for block hours calculation */
     "End": IsoDateTime,
     "StartLocalTimeDiff": 420,
     "EndLocalTimeDiff": 180,
@@ -59,6 +63,25 @@ export type RosterActivity = {
     "Credit": 0,
     "Comment": "",
 };
+
+/** @see https://aai-apim-dev-northeu-01.developer.azure-api.net/api-details#api=abd-uat-rest-v1&operation=Roster_GetRosters&definition=RosterActivity */
+export type RosterActivity = RosterActivityBase & ({
+    ActivityType: "REFERENCEACTIVITY",
+    Code: GroundActivityCode,
+    ActivityCode: GroundActivityCode,
+    Times: [],
+    "EquipmentType": "",
+    "EquipmentVersion": "",
+} | {
+    ActivityType: "FLIGHT",
+    ActivitySubType: "",
+    Code: FlightNumber,
+    ActivityCode: FlightNumber,
+    Times: {
+        Type: "ActualStart" | "ActualEnd" | "CheckIn" | "DutyStart" | "DutyEnd",
+        DateTime: "2024-07-02T08:58:00Z" | IsoDateTimeBase<"Z">,
+    }[],
+});
 
 export type RosterCrew = Crew & {
     RosterActivities: RosterActivity[],
