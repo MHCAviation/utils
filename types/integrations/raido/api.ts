@@ -27,7 +27,7 @@ export type Crew = {
 };
 
 type FlightNumber = "SV4461" | "SV5501" | "SV5461" | "SV4418" | `${string}${number}`;
-type GroundActivityCode = "FLT" | "GT" | "HSV" | "SBN" | "SBA" | "OFF" | "ILL" | "CFD" | "SBD" | "EML" | "8h" | "VAU" | "AV7" | "AV4" | "SCO" | "GTD" | "HTN" | "HTM" | "R14" | "DUT" | "CBO" | "HTL" | "S74" | "12h" | "APP" | "VAC" | "POT" | "DLRP" | "ULV" | "RLO" | "LMD" | "LEE" | "COU" | "NTS" | "PXP" | "CRM" | "DGR" | "AID" | "R12" | "ET4" | "ROF" | "WBB" | "OFN" | "SW" | "EA4" | "S77";
+type GroundActivityCode = "FLT" | "GT" | "HSV" | "SBN" | "SBA" | "OFF" | "ILL" | "CFD" | "SBD" | "EML" | "8h" | "VAU" | "AV7" | "AV4" | "SCO" | "GTD" | "HTN" | "HTM" | "R14" | "DUT" | "CBO" | "HTL" | "S74" | "12h" | "APP" | "VAC" | "POT" | "DLRP" | "ULV" | "RLO" | "LMD" | "LEE" | "COU" | "NTS" | "PXP" | "CRM" | "DGR" | "AID" | "R12" | "ET4" | "ROF" | "WBB" | "OFN" | "SW" | "EA4" | "S77" | string;
 
 type RosterActivityBase = {
     "AssignedRank": "SC" | "CC" | "G2" | "OF" | "FO" | "CP" | "MX" | "LM",
