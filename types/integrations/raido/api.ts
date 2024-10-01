@@ -141,8 +141,8 @@ export type Crew_GetCrew_RQ = {
 export type Crew_GetCrew_RS = Crew[];
 
 export type Roster_GetRosters_RQ = {
-    From: IsoDate, // Format - date-time (as date-time in RFC3339).
-    To: IsoDate, // Format - date-time (as date-time in RFC3339).
+    From: IsoDateTime, // Format - date-time (as date-time in RFC3339).
+    To: IsoDateTime, // Format - date-time (as date-time in RFC3339).
     FilterID?: number, // Format - int32.
     UniqueId?: HumanResourceUniqueId,
     FilterName?: string,
