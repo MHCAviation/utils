@@ -43,7 +43,7 @@ type RosterActivityBase = {
     "IsCarryOverActivity": false,
     "UniqueId": 898671,
     "ActivityType": "REFERENCEACTIVITY" | "FLIGHT",
-    "ActivitySubType": "" | "Unknown" | "Transport" | "Hotel" | "StandBy" | "DayOff" | "Illness" | "Vacation" | "Shift" | "Training" | "Simulator",
+    "ActivitySubType": "" | "Unknown" | "Transport" | "Hotel" | "StandBy" | "DayOff" | "Illness" | "Vacation" | "Shift" | "Training" | "Simulator" | "Compensation",
     "ActivityCode": FlightNumber | GroundActivityCode,
     "StartAirportCode": IataAirport,
     "EndAirportCode": IataAirport,
