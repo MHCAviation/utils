@@ -39,7 +39,7 @@ export const CrewCode = (value: string): CrewCode => {
     if (!unprefixed.match(/^[A-Z]+$/)) {
         throw new Error("CrewCode is expected to consist only of letters");
     }
-    return unprefixed as CrewCode;
+    return value as CrewCode;
 };
 
 export type CREWCODE = UpperCased<CrewCode>;
