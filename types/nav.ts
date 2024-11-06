@@ -29,16 +29,17 @@ const CrewCodeTag = Symbol("CrewCode");
 export type CrewCode = Brand<"MVS" | "KAR" | "GIRE" | "UPC" | "JNM" | "AAD" | "klar" | string, typeof CrewCodeTag>;
 export const CrewCode = (value: string): CrewCode => {
     value = value.trim().toUpperCase();
-    if (value.length < 3) {
+    const unprefixed = value.replace(/^\w+-/, ""); // AM-PICO in Air Atlanta
+    if (unprefixed.length < 3) {
         throw new Error("CrewCode can not be less than 3 characters");
     }
-    if (value.length > 6) {
+    if (unprefixed.length > 6) {
         throw new Error("CrewCode is not expected to be longer than 6 characters");
     }
-    if (!value.match(/^[A-Z]+$/)) {
+    if (!unprefixed.match(/^[A-Z]+$/)) {
         throw new Error("CrewCode is expected to consist only of letters");
     }
-    return value as CrewCode;
+    return unprefixed as CrewCode;
 };
 
 export type CREWCODE = UpperCased<CrewCode>;
