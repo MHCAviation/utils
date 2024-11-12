@@ -67,3 +67,9 @@ export type IanaTimezone = Brand<"Atlantic/Reykjavik" | "Asia/Karachi" | "Americ
 
 const IsoAlpha2Country = Symbol("IsoAlpha2Country");
 export type IsoAlpha2Country = "LV" | "GB" | Brand<string, typeof IsoAlpha2Country>;
+
+declare global {
+    interface Date {
+        toISOString(): IsoDateTime,
+    }
+}
