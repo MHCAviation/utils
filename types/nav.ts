@@ -36,8 +36,8 @@ export const CrewCode = (value: string): CrewCode => {
     if (unprefixed.length > 6) {
         throw new Error("CrewCode is not expected to be longer than 6 characters");
     }
-    if (!unprefixed.match(/^[A-Z]+$/)) {
-        throw new Error("CrewCode is expected to consist only of letters");
+    if (!unprefixed.match(/^[A-Z][A-Z0-9]+$/)) {
+        throw new Error("CrewCode is expected to start with a letter and be followed only by alpha-numeric characters");
     }
     return value as CrewCode;
 };
