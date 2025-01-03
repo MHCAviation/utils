@@ -151,7 +151,7 @@ export type Roster_GetRosters_RQ = {
     RosterType?: string,
     ReferenceActivity?: string,
     OnlyActive?: boolean,
-    CrewWithActivity?: boolean,
+    CrewWithActivities?: boolean,
     WithCarryOverActivities?: boolean,
     RequestData?: string[],
 };
