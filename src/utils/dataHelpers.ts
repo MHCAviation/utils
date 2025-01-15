@@ -1,4 +1,5 @@
 import { fromEntries } from "../typing.js";
+import type { JsonArray, JsonObject, JsonValue } from "../../types/utility";
 
 /**
  * usage:
@@ -32,4 +33,85 @@ export function rowsToObjects<
         const obj: Partial<Record<keyof Tobj, Tobj[keyof Tobj]>> = fromEntries(entries);
         return obj as Tobj;
     });
+}
+
+export function deepCopy<T extends JsonValue>(value: T): T {
+    return JSON.parse(JSON.stringify(value)) as T;
+}
+
+/** @see https://stackoverflow.com/a/58436959/2750743 */
+export type Paths<T> =
+    T extends [...unknown[]] ? {
+        [K in keyof T]-?: [K, ...Paths<T[K]> | []]
+    }[keyof T & `${number}`] :
+    T extends object ? {
+        [K in keyof T]-?: [K, ...Paths<T[K]> | []]
+    }[keyof T] :
+    never;
+
+/**
+ * @kudos to chatgpt
+ * not sure if this expression could have been simplified... but at least it works correctly and does not seem to be slow
+ * const value: PathValue<{ a: { b: [{ c: 123 }] } }, ["a", "b", "0", "c"]> = 123;
+ */
+export type PathValue<T, K extends Paths<NonNullable<T>>> =
+    K extends [infer First, ...infer Rest]
+        ? First extends keyof T
+            ? Rest extends []
+                ? T[First]
+                : Rest extends Paths<T[First]>
+                    ? PathValue<NonNullable<T[First]>, Rest>
+                    : never
+            // special case for tuple keys; tbh I don't understand why `"0" keyof [{}] | []` is never...
+            : First extends `${number}`
+                ? T extends readonly [...unknown[]] & { [k in First]: unknown }
+                    ? Rest extends Paths<T[First]>
+                        ? PathValue<T[First], Rest>
+                        : never
+                    : never
+                : never
+        : T;
+
+function setAt(destination: JsonObject | JsonArray, key: string, value: JsonValue) {
+    if (Array.isArray(destination)) {
+        destination[Number(key)] = value;
+    } else {
+        destination[key] = value;
+    }
+}
+
+/**
+ * works same way as lodash's _.set()
+ * @see https://lodash.com/docs/4.17.15#set
+ * too bad lodash typing allows arbitrary strings in keys on the moment of writing
+ *
+ * const tree = { a: { b: [{ c: {} }] } };
+ * setAtPath(tree, ["a", "b", "0", "c", "hey", "ho"], -100);
+ * console.log(tree);
+ * { a: { b: [{ c: { hey: { ho: -100 } } }] } };
+ */
+export function setAtPath<
+    TObj extends JsonObject,
+    const TKeys extends Paths<TObj> & string[]
+>(root: TObj, keys: TKeys, value: PathValue<TObj, TKeys>): void {
+    if (keys.length === 0) {
+        throw new Error("Keys argument may not be empty array");
+    }
+    const plainKeys: string[] = keys;
+    let objNode: JsonObject | JsonArray = root;
+    const lastKey: string = plainKeys[keys.length - 1];
+    for (const key of plainKeys.slice(0, -1)) {
+        const nextNode: JsonValue = Array.isArray(objNode)
+            ? objNode[Number(key)] : objNode[key];
+        if (!nextNode) {
+            const newNode: JsonObject = {};
+            setAt(objNode, key, newNode);
+            objNode = newNode;
+        } else if (typeof nextNode !== "object") {
+            throw new Error("Unexpected primitive at the key: " + key);
+        } else {
+            objNode = nextNode;
+        }
+    }
+    setAt(objNode, lastKey, value);
 }

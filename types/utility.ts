@@ -22,7 +22,7 @@ export type JsonValue<TExtra = never> = JsonPrimitiveValue | TExtra | JsonArray<
 
 export type JsonPrimitiveValue = number | string | boolean | null;
 
-interface JsonArray<TExtra = never> extends Array<JsonValue<TExtra>> {}
+export interface JsonArray<TExtra = never> extends Array<JsonValue<TExtra>> {}
 
 export interface JsonObject<TExtra = never> {
     [key: string]: JsonValue<TExtra>,
