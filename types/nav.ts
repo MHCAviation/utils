@@ -6,7 +6,7 @@ const UpperCased = Symbol("UpperCased");
 export type UpperCased<T> = T & { [k in typeof UpperCased]: undefined };
 
 const CompanyNameTag = Symbol("CompanyName");
-type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${string} - ${string}`;
+export type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${string} - ${string}`;
 export type CompanyName = Brand<CompanyNameLiteral, typeof CompanyNameTag>;
 export const CompanyName = (value: string): CompanyName => {
     if (!value.match(/^(\w+\s*)+-\s*\w+$/) &&
@@ -17,6 +17,11 @@ export const CompanyName = (value: string): CompanyName => {
     return value as CompanyName;
 };
 export type COMPANYNAME = UpperCased<CompanyName>;
+/** for whatever reason using `${string} - ${string}` instead of string makes typescript not recognize regular `===` comparison */
+export function isSameCompany(actual: CompanyName, expected: CompanyNameLiteral) {
+    return toCOMPANYNAMEUC(actual) === toUpperCase(expected);
+}
+
 
 /**
  * aka 3/4 letter code (though it may sometimes be longer than 4 characters)
@@ -43,3 +48,15 @@ export const CrewCode = (value: string): CrewCode => {
 };
 
 export type CREWCODE = UpperCased<CrewCode>;
+
+export function toUpperCase<T extends string>(value: T): UpperCased<T> {
+    return value.toUpperCase() as UpperCased<T>;
+}
+
+export function toCrewCodeUc(crewCode: CrewCode): CREWCODE {
+    return toUpperCase(crewCode);
+}
+
+export function toCOMPANYNAMEUC(companyName: CompanyName): COMPANYNAME {
+    return toUpperCase(companyName);
+}
