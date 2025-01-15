@@ -22,7 +22,6 @@ export function isSameCompany(actual: CompanyName, expected: CompanyNameLiteral)
     return toCOMPANYNAMEUC(actual) === toUpperCase(expected);
 }
 
-
 /**
  * aka 3/4 letter code (though it may sometimes be longer than 4 characters)
  * aka employee code
