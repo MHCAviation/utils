@@ -1,3 +1,4 @@
+import { neverNull } from "../src/typing";
 
 export type Entry<T> = {
     [K in keyof T]: [K, T[K]];
@@ -36,6 +37,20 @@ export const EmailAddress = (value: string): EmailAddress => {
     const [, username, hostname, country] = match;
     return `${username}@${hostname}.${country}`;
 };
+
+export function asEmail(value: string): EmailAddress | null {
+    const match = value.match(/^(\S+)@(\S+)\.(\S+)$/);
+    if (!match) {
+        return null;
+    }
+    const [, username, hostname, country] = match;
+    return `${username}@${hostname}.${country}`;
+}
+
+export function asEmailOrFail(value: string): EmailAddress {
+    return asEmail(value)
+        ?? neverNull("Invalid E-Mail Address format: " + value);
+}
 
 export type HttpUrl = `http${"s" | ""}://${string}.${string}`;
 export type Pathname = `/${string}`;
