@@ -6,7 +6,7 @@ const UpperCased = Symbol("UpperCased");
 export type UpperCased<T> = T & { [k in typeof UpperCased]: undefined };
 
 const CompanyNameTag = Symbol("CompanyName");
-type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | string;
+type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${string} - ${string}`;
 export type CompanyName = Brand<CompanyNameLiteral, typeof CompanyNameTag>;
 export const CompanyName = (value: string): CompanyName => {
     if (!value.match(/^(\w+\s*)+-\s*\w+$/) &&
