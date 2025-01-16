@@ -72,6 +72,11 @@ export type PathValue<T, K extends Paths<NonNullable<T>>> =
                 : never
         : T;
 
+type FillPath<TKeys extends string[], TValue> =
+    TKeys extends [infer First extends string, ...infer Rest extends string[]]
+        ? Record<First, FillPath<Rest, TValue>>
+        : TValue;
+
 function setAt(destination: JsonObject | JsonArray, key: string, value: JsonValue) {
     if (Array.isArray(destination)) {
         destination[Number(key)] = value;
@@ -86,19 +91,25 @@ function setAt(destination: JsonObject | JsonArray, key: string, value: JsonValu
  * too bad lodash typing allows arbitrary strings in keys on the moment of writing
  *
  * const tree = { a: { b: [{ c: {} }] } };
- * setAtPath(tree, ["a", "b", "0", "c", "hey", "ho"], -100);
- * console.log(tree);
+ * const newTree = setAtPath(tree, ["a", "b", "0", "c", "hey", "ho"], -100);
+ * console.log(newTree);
  * { a: { b: [{ c: { hey: { ho: -100 } } }] } };
+ *
+ * big downside of the typing here is that it makes all optional keys in the path
+ * mandatory and therefore potentially adding mandatory subkeys of optional
+ * keys to the type even though it does not add them in the value, so for now you have to be mindful
+ * of that and do the necessary checks on the calling site even though typing does not force you to
  */
 export function setAtPath<
     TObj extends JsonObject,
     const TKeys extends Paths<TObj> & string[]
->(root: TObj, keys: TKeys, value: PathValue<TObj, TKeys>): void {
+>(oldRoot: TObj, keys: TKeys, value: PathValue<TObj, TKeys>): TObj & FillPath<TKeys, PathValue<TObj, TKeys>> {
     if (keys.length === 0) {
         throw new Error("Keys argument may not be empty array");
     }
+    const newRoot = deepCopy(oldRoot);
     const plainKeys: string[] = keys;
-    let objNode: JsonObject | JsonArray = root;
+    let objNode: JsonObject | JsonArray = newRoot;
     const lastKey: string = plainKeys[keys.length - 1];
     for (const key of plainKeys.slice(0, -1)) {
         const nextNode: JsonValue = Array.isArray(objNode)
@@ -114,4 +125,5 @@ export function setAtPath<
         }
     }
     setAt(objNode, lastKey, value);
+    return newRoot as TObj & FillPath<TKeys, PathValue<TObj, TKeys>>;
 }
