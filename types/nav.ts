@@ -1,6 +1,8 @@
+import type { Brand } from "./utility";
+
 /**
  * @package -  here you'll find types related to our NAV 2009 software integration
- */ import type { Brand } from "./utility";
+ */
 
 const UpperCased = Symbol("UpperCased");
 export type UpperCased<T> = T & { [k in typeof UpperCased]: undefined };

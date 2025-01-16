@@ -1,4 +1,4 @@
-import { neverNull } from "../src/typing";
+import { neverNull } from "../src/typing.js";
 
 export type Entry<T> = {
     [K in keyof T]: [K, T[K]];
