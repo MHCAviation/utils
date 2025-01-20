@@ -97,7 +97,7 @@ function setAt(destination: JsonObject | JsonArray, key: string, value: JsonValu
  */
 export function setAtPath<
     TObj extends JsonObject,
-    const TKeys extends Paths<TObj> & string[]
+    const TKeys extends Paths<TObj>
 >(oldRoot: TObj, keys: TKeys, value: PathValue<TObj, TKeys>): TObj & FillPath<TKeys, PathValue<TObj, TKeys>> {
     if (keys.length === 0) {
         throw new Error("Keys argument may not be empty array");
