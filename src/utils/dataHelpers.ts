@@ -55,22 +55,17 @@ export type Paths<T> =
  * const value: PathValue<{ a: { b: [{ c: 123 }] } }, ["a", "b", "0", "c"]> = 123;
  */
 export type PathValue<T, K extends Paths<NonNullable<T>>> =
-    K extends [infer First, ...infer Rest]
-        ? First extends keyof T
-            ? Rest extends []
-                ? T[First]
-                : Rest extends Paths<T[First]>
-                    ? PathValue<NonNullable<T[First]>, Rest>
-                    : never
-            // special case for tuple keys; tbh I don't understand why `"0" keyof [{}] | []` is never...
-            : First extends `${number}`
-                ? T extends readonly [...unknown[]] & { [k in First]: unknown }
-                    ? Rest extends Paths<T[First]>
-                        ? PathValue<T[First], Rest>
+    T extends T ?
+        K extends [infer First, ...infer Rest]
+            ? First extends keyof T
+                ? Rest extends []
+                    ? T[First]
+                    : Rest extends Paths<T[First]>
+                        ? PathValue<NonNullable<T[First]>, Rest>
                         : never
-                    : never
                 : never
-        : T;
+            : T
+        : never;
 
 type FillPath<TKeys extends string[], TValue> =
     TKeys extends [infer First extends string, ...infer Rest extends string[]]
