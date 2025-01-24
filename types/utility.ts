@@ -1,4 +1,3 @@
-import { neverNull } from "../src/typing.js";
 
 export type Entry<T> = {
     [K in keyof T]: [K, T[K]];
@@ -48,8 +47,12 @@ export function asEmail(value: string): EmailAddress | null {
 }
 
 export function asEmailOrFail(value: string): EmailAddress {
-    return asEmail(value)
-        ?? neverNull("Invalid E-Mail Address format: " + value);
+    const emailMaybe = asEmail(value);
+    if (emailMaybe) {
+        return emailMaybe;
+    } else {
+        throw new Error("Invalid E-Mail Address format: " + value);
+    }
 }
 
 export type HttpUrl = `http${"s" | ""}://${string}.${string}`;

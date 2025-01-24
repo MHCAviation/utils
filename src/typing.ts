@@ -33,7 +33,6 @@ export const brand = <TBranded extends Brand<unknown, symbol>>(value: Unbrand<TB
  * const nullable: string | null = getSomething();
  * const unsafeAssertion: string = nullable!;
  * const safeAssertion: string = nullable ?? neverNull();
- *
  */
 export function neverNull(message?: string): never {
     throw new TypeError("Unexpected null value" + (!message ? "" : " " + message));
