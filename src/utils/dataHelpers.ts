@@ -1,4 +1,4 @@
-import { fromEntries } from "../typing.js";
+import { fromEntries } from "../typing.ts";
 import type { JsonArray, JsonObject, JsonValue } from "../../types/utility";
 
 /**
