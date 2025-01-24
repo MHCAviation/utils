@@ -35,7 +35,7 @@ export function rowsToObjects<
     });
 }
 
-export function deepCopy<T extends JsonValue>(value: T): T {
+export function deepCopy<T extends JsonValue<undefined>>(value: T): T {
     return JSON.parse(JSON.stringify(value)) as T;
 }
 
