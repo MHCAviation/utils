@@ -134,7 +134,10 @@ export type Crew_GetCrew_RQ = {
     empNumber?: CrewCode,
     requestData?: string[],
     offset?: number, // Format - int32.
-    /** seems like you can just pass 1000 to get all 824 people that are in there and not mess with offset */
+    /**
+     * may not exceed 5000
+     * seems like you can just pass 1000 to get all 824 people that are in there and not mess with offset
+     */
     limit?: number, // Format - int32.
 };
 
