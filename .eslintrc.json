@@ -5,7 +5,8 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "unused-imports"
+        "unused-imports",
+        "import"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -21,6 +22,10 @@
         "toastr": true
     },
     "rules": {
+        "import/extensions": ["error", "always", {
+            "js": "always",
+            "ts": "always"
+        }],
         "prefer-const": "warn",
         "no-undef": "error",
         "no-var": "warn",

@@ -21,7 +21,7 @@ export type JsonValue<TExtra = never> = JsonPrimitiveValue | TExtra | JsonArray<
 
 export type JsonPrimitiveValue = number | string | boolean | null;
 
-interface JsonArray<TExtra = never> extends Array<JsonValue<TExtra>> {}
+export interface JsonArray<TExtra = never> extends Array<JsonValue<TExtra>> {}
 
 export interface JsonObject<TExtra = never> {
     [key: string]: JsonValue<TExtra>,
@@ -29,13 +29,34 @@ export interface JsonObject<TExtra = never> {
 
 export type EmailAddress = `${string}@${string}.${string}`;
 export const EmailAddress = (value: string): EmailAddress => {
-    const match = value.match(/^(\S+)@(\S+).(\S+)$/);
+    const match = value.match(/^(\S+)@(\S+)\.(\S+)$/);
     if (!match) {
         throw new Error("Invalid E-Mail Address format: " + value);
     }
     const [, username, hostname, country] = match;
     return `${username}@${hostname}.${country}`;
 };
+
+export function asEmail(value: string): EmailAddress | null {
+    const match = value.match(/^(\S+)@(\S+)\.(\S+)$/);
+    if (!match) {
+        return null;
+    }
+    const [, username, hostname, country] = match;
+    return `${username}@${hostname}.${country}`;
+}
+
+export function asEmailOrFail(value: string): EmailAddress {
+    const emailMaybe = asEmail(value);
+    if (emailMaybe) {
+        return emailMaybe;
+    } else {
+        throw new Error("Invalid E-Mail Address format: " + value);
+    }
+}
+
+export type HttpUrl = `http${"s" | ""}://${string}.${string}`;
+export type Pathname = `/${string}`;
 
 const Base64Tag = Symbol("Base64");
 export type Base64 = Brand<string, typeof Base64Tag>;
@@ -51,7 +72,7 @@ export type IsoDate = "2024-07-16" | "2024-03-13" | `${MonthStr}-${Pad2}`;
 
 type SecondFraction = "" | `.${number}`;
 type IsoTime = "23:59:59" | "00:00:00.1234" | `${number}:${number}:${number}${SecondFraction}`;
-type IsoDateTimeBase<TTimeZoneOffset extends string> = `${IsoDate}T${IsoTime}${TTimeZoneOffset}`;
+export type IsoDateTimeBase<TTimeZoneOffset extends string> = `${IsoDate}T${IsoTime}${TTimeZoneOffset}`;
 /** as serialized from C# System.DateTime by Newtonsoft.Json */
 export type IsoDateTime = IsoDateTimeBase<"" | "Z">;
 export type IsoDateTimeOffset = IsoDateTimeBase<`${"+" | "-"}${number}${"" | `:${Pad2}`}}`>;
@@ -64,3 +85,9 @@ export type IanaTimezone = Brand<"Atlantic/Reykjavik" | "Asia/Karachi" | "Americ
 
 const IsoAlpha2Country = Symbol("IsoAlpha2Country");
 export type IsoAlpha2Country = "LV" | "GB" | Brand<string, typeof IsoAlpha2Country>;
+
+declare global {
+    interface Date {
+        toISOString(): IsoDateTime,
+    }
+}

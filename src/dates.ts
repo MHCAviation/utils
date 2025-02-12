@@ -13,7 +13,7 @@ export function getDatePart(dateTime: Date | `${IsoDate}${string}`): IsoDate {
     }
 }
 
-function pad2(value: number): Pad2 {
+export function pad2(value: number): Pad2 {
     if (value < 10) {
         return `0${value}` as const;
     } else {
@@ -36,6 +36,13 @@ export function getMonthStartDate(yearMonth: AbsoluteMonth): IsoDate {
 export function getMonthEndDate(yearMonth: AbsoluteMonth): IsoDate {
     const lastDay = getNumberOfDays(yearMonth);
     return getMonthDate(yearMonth, lastDay);
+}
+
+export function* getMonthDates(yearMonth: AbsoluteMonth): Iterable<IsoDate> {
+    const daysInMonth = getNumberOfDays(yearMonth);
+    for (let dayIndex = 0; dayIndex < daysInMonth; ++dayIndex) {
+        yield getMonthDate(yearMonth, dayIndex + 1);
+    }
 }
 
 function getMonthStartDateObj({ year, month }: AbsoluteMonth) {
@@ -77,6 +84,12 @@ export function incrementMonth({ year, month }: AbsoluteMonth) {
         year: dateObj.getUTCFullYear(),
         month: dateObj.getUTCMonth() + 1,
     };
+}
+
+export function decrementDay(date: IsoDate): IsoDate {
+    const dateObj = new Date(date);
+    dateObj.setUTCDate(dateObj.getUTCDate() - 1);
+    return getDatePart(dateObj);
 }
 
 export function incrementDay(date: IsoDate): IsoDate {
