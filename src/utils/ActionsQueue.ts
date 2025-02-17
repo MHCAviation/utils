@@ -8,7 +8,7 @@
 const ActionsQueue = () => {
     let lastPromise: Promise<unknown> = Promise.resolve();
 
-    const enqueue = async <T>(action: () => Promise<T> | T): Promise<T> => {
+    const enqueue = async function<T>(action: () => Promise<T> | T): Promise<T> {
         const promise = lastPromise
             .catch(() => {}).then(action);
         lastPromise = promise;
