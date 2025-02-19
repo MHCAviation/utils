@@ -2,6 +2,20 @@ import type { Brand,Entries,JsonValue,Keys, Unbrand } from "../types/utility";
 
 export const typed = <T,>(v: T) => v;
 
+/** typeof of this symbol will never be assignable to anything but `any` */
+const Any = Symbol("Any");
+
+/**
+ * a safer alternative to `anyValue as Type` that only allows you to do the type cast on
+ * `any` types and will not allow you to accidentally erase type information on non-any types
+ * intended primarily for no-unsafe-* eslint rules
+ * @deprecated - just to highlight it in the IDE since any is bad and this function
+ *     does a bad thing and we should all strive for the great future where there is no any
+ */
+export function unAny<T = unknown>(arg: typeof Any): T {
+    return arg as T;
+}
+
 /** kudos to https://stackoverflow.com/a/60142095/2750743 */
 export const entries = <T extends {}>(object: T): Entries<T> => Object.entries(object) as Entries<T>;
 export const keys = <T extends {}>(object: T): Keys<T> => Object.keys(object) as Keys<T>;
