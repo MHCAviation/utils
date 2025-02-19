@@ -97,5 +97,6 @@ declare global {
 
     interface JSON {
         stringify<T extends JsonValue>(value: T): JsonStringified<T>,
+        parse<T extends JsonValue>(text: JsonStringified<T>): T,
     }
 }
