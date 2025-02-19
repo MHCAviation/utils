@@ -27,6 +27,10 @@ export interface JsonObject<TExtra = never> {
     [key: string]: JsonValue<TExtra>,
 }
 
+const JsonStringifiedTag = Symbol("JsonStringified");
+export type JsonStringified<T extends JsonValue = JsonValue> =
+    Brand<string, typeof JsonStringifiedTag> & { __stringifiedValue: T };
+
 export type EmailAddress = `${string}@${string}.${string}`;
 export const EmailAddress = (value: string): EmailAddress => {
     const match = value.match(/^(\S+)@(\S+)\.(\S+)$/);
@@ -89,5 +93,9 @@ export type IsoAlpha2Country = "LV" | "GB" | Brand<string, typeof IsoAlpha2Count
 declare global {
     interface Date {
         toISOString(): IsoDateTime,
+    }
+
+    interface JSON {
+        stringify<T extends JsonValue>(value: T): JsonStringified<T>,
     }
 }
