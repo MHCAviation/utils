@@ -28,7 +28,7 @@ export interface JsonObject<TExtra = never> {
 }
 
 const JsonStringifiedTag = Symbol("JsonStringified");
-export type JsonStringified<T extends JsonValue = JsonValue> =
+export type JsonStringified<T extends JsonValue<undefined> = JsonValue> =
     Brand<string, typeof JsonStringifiedTag> & { __stringifiedValue: T };
 
 export type EmailAddress = `${string}@${string}.${string}`;
@@ -96,7 +96,7 @@ declare global {
     }
 
     interface JSON {
-        stringify<T extends JsonValue>(value: T): JsonStringified<T>,
-        parse<T extends JsonValue>(text: JsonStringified<T>): T,
+        stringify<T extends JsonValue<undefined> = JsonValue>(value: T): JsonStringified<T>,
+        parse<T extends JsonValue<undefined> = JsonValue>(text: JsonStringified<T>): T,
     }
 }

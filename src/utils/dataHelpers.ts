@@ -36,7 +36,7 @@ export function rowsToObjects<
 }
 
 export function deepCopy<T extends JsonValue<undefined>>(value: T): T {
-    return JSON.parse(JSON.stringify(value)) as T;
+    return JSON.parse<T>(JSON.stringify<T>(value));
 }
 
 /** @see https://stackoverflow.com/a/58436959/2750743 */
