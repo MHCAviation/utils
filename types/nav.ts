@@ -12,7 +12,8 @@ export type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LA
 export type CompanyName = Brand<CompanyNameLiteral, typeof CompanyNameTag>;
 export const CompanyName = (value: string): CompanyName => {
     if (!value.match(/^(\w+\s*)+-\s*\w+$/) &&
-        value.toUpperCase() !== "LSN - NVD EUR EMPL"
+        value.toUpperCase() !== "LSN - NVD EUR EMPL" &&
+        value.toUpperCase() !== "MHCAVIATION SIA"
     ) {
         throw new Error("Supplied COMPANYNAME has invalid format: " + value);
     }
