@@ -31,6 +31,24 @@ const JsonStringifiedTag = Symbol("JsonStringified");
 export type JsonStringified<T extends JsonValue<undefined> = JsonValue> =
     Brand<string, typeof JsonStringifiedTag> & { __stringifiedValue: T };
 
+export type NumericString = `${number}`;
+export function asNumericString(value: string): NumericString | null {
+    // disregarding scientific notation, f*ck it
+    if (value.match(/^-?\d+(\.\d+)?$/)) {
+        return value as `${number}`;
+    } else {
+        return null;
+    }
+}
+export function NumericString(value: string): NumericString {
+    const numericStringMaybe = asNumericString(value);
+    if (numericStringMaybe) {
+        return numericStringMaybe;
+    } else {
+        throw new Error("Invalid numeric string: " + value);
+    }
+}
+
 export type EmailAddress = `${string}@${string}.${string}`;
 export const EmailAddress = (value: string): EmailAddress => {
     const match = value.match(/^(\S+)@(\S+)\.(\S+)$/);
