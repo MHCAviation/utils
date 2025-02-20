@@ -14,7 +14,7 @@ export const CompanyName = (value: string): CompanyName => {
     if (!value.match(/^(\w+\s*)+-\s*\w+$/) &&
         value.toUpperCase() !== "LSN - NVD EUR EMPL"
     ) {
-        throw new Error("Supplied COMPANYNAME has invalid format");
+        throw new Error("Supplied COMPANYNAME has invalid format: " + value);
     }
     return value as CompanyName;
 };
