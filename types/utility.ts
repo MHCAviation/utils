@@ -117,4 +117,9 @@ declare global {
         stringify<T extends JsonValue<undefined> = JsonValue>(value: T): JsonStringified<T>,
         parse<T extends JsonValue<undefined> = JsonValue>(text: JsonStringified<T>): T,
     }
+
+    interface Window {
+        btoa(buffer: string): Base64,
+        atob(data: Base64): string,
+    }
 }
