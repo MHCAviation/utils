@@ -99,8 +99,15 @@ export type IsoDateTimeBase<TTimeZoneOffset extends string> = `${IsoDate}T${IsoT
 export type IsoDateTime = IsoDateTimeBase<"" | "Z">;
 export type IsoDateTimeOffset = IsoDateTimeBase<`${"+" | "-"}${number}${"" | `:${Pad2}`}}`>;
 
-const IataAirport = Symbol("IataAirport");
-export type IataAirport = Brand<"JED" | "PLM" | "MED" | "RIX" | "CDG" | "WAW" | string, typeof IataAirport>;
+const IataAirportTag = Symbol("IataAirport");
+export type IataAirport = Brand<"JED" | "PLM" | "MED" | "RIX" | "CDG" | "WAW" | string, typeof IataAirportTag>;
+export const IataAirport = (value: string): IataAirport => {
+    if (value.match(/^[A-Z]{3}$/)) {
+        return value as IataAirport;
+    } else {
+        throw new Error("Invalid IATA airport code format supplied: " + value);
+    }
+};
 
 const IanaTimezone = Symbol("IanaTimezone");
 export type IanaTimezone = Brand<"Atlantic/Reykjavik" | "Asia/Karachi" | "America/New_York" | string, typeof IanaTimezone>;
