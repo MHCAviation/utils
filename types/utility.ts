@@ -123,6 +123,7 @@ declare global {
     interface JSON {
         stringify<T extends JsonValue<undefined> = JsonValue>(value: T): JsonStringified<T>,
         parse<T extends JsonValue<undefined> = JsonValue>(text: JsonStringified<T>): T,
+        parse<T extends JsonValue<undefined> = JsonValue>(text: string): JsonValue,
     }
 
     interface Window {
