@@ -55,10 +55,10 @@ export function neverNull(message?: string): never {
 /**
  * no-unsafe-* eslint rule really hates JSON.parse() and for a reason I guess
  * this helper function is a slightly type-safer alternative
+ * upd.: now that we are overriding the signature of JSON.parse(), this helper function is not needed I think
  */
 export function parseJson<T extends JsonValue = JsonValue>(jsonStr: string): T {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return JSON.parse(jsonStr);
+    return JSON.parse(jsonStr) as T;
 }
 
 export function getTypeName(value: unknown) {
