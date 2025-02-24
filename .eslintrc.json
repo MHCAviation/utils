@@ -19,7 +19,7 @@
         }
     },
     "globals": {
-        "toastr": true
+
     },
     "rules": {
         "import/extensions": ["error", "always", {
@@ -27,7 +27,6 @@
             "ts": "always"
         }],
         "prefer-const": "warn",
-        "no-undef": "error",
         "no-var": "warn",
         "no-mixed-spaces-and-tabs": "error",
         "unused-imports/no-unused-imports": "error",

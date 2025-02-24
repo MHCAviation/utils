@@ -12,7 +12,7 @@ const Any = Symbol("Any");
  * @deprecated - just to highlight it in the IDE since any is bad and this function
  *     does a bad thing and we should all strive for the great future where there is no any
  */
-export function unAny<T = unknown>(arg: typeof Any): T {
+export function unAny<T = unknown>(arg: typeof Any): NoInfer<T> {
     return arg as T;
 }
 
@@ -39,7 +39,7 @@ export const fromEntries = <
     return Object.fromEntries(entries) as FromEntries<TEntries>;
 };
 
-export const brand = <TBranded extends Brand<unknown, symbol>>(value: Unbrand<TBranded>): TBranded => {
+export const brand = <TBranded extends Brand<unknown, symbol>>(value: Unbrand<TBranded>): NoInfer<TBranded> => {
     return value as {} as TBranded;
 };
 
