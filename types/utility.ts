@@ -123,11 +123,11 @@ const IanaTimezone = Symbol("IanaTimezone");
 export type IanaTimezone = Brand<"Atlantic/Reykjavik" | "Asia/Karachi" | "America/New_York" | string, typeof IanaTimezone>;
 
 const IsoAlpha2CountryTag = Symbol("IsoAlpha2Country");
-export type IsoAlpha2Country = "LV" | "GB" | Brand<string, typeof IsoAlpha2CountryTag>;
-export function IsoAlpha2Country(value: string): CurrencyIsoCode {
+export type IsoAlpha2Country = Brand<"LV" | "GB" | string, typeof IsoAlpha2CountryTag>;
+export function IsoAlpha2Country(value: string): IsoAlpha2Country {
     value = value.toUpperCase();
     if (value.match(/^[A-Z]{2}$/)) {
-        return brand<CurrencyIsoCode>(value);
+        return brand<IsoAlpha2Country>(value);
     } else {
         throw new Error("Invalid ISO 2-letter country format: " + value);
     }
