@@ -1,3 +1,4 @@
+import { brand } from "../src/typing.ts";
 
 export type Entry<T> = {
     [K in keyof T]: [K, T[K]];
@@ -83,8 +84,17 @@ export type Pathname = `/${string}`;
 const Base64Tag = Symbol("Base64");
 export type Base64 = Brand<string, typeof Base64Tag>;
 
-const CurrencyIsoCode = Symbol("CurrencyIsoCode");
-export type CurrencyIsoCode = Brand<"EUR" | "IDR" | string, typeof CurrencyIsoCode>;
+const CurrencyIsoCodeTag = Symbol("CurrencyIsoCode");
+/** ISO 4217 */
+export type CurrencyIsoCode = Brand<"EUR" | "IDR" | string, typeof CurrencyIsoCodeTag>;
+export function CurrencyIsoCode(value: string): CurrencyIsoCode {
+    value = value.toUpperCase();
+    if (value.match(/^[A-Z]{3}$/)) {
+        return brand<CurrencyIsoCode>(value);
+    } else {
+        throw new Error("Invalid ISO 4217 currency format: " + value);
+    }
+}
 
 /** relaxed compiler-friendly type for MM and DD part in dates */
 export type Pad2 = number | `0${number}`;
@@ -112,8 +122,16 @@ export const IataAirport = (value: string): IataAirport => {
 const IanaTimezone = Symbol("IanaTimezone");
 export type IanaTimezone = Brand<"Atlantic/Reykjavik" | "Asia/Karachi" | "America/New_York" | string, typeof IanaTimezone>;
 
-const IsoAlpha2Country = Symbol("IsoAlpha2Country");
-export type IsoAlpha2Country = "LV" | "GB" | Brand<string, typeof IsoAlpha2Country>;
+const IsoAlpha2CountryTag = Symbol("IsoAlpha2Country");
+export type IsoAlpha2Country = "LV" | "GB" | Brand<string, typeof IsoAlpha2CountryTag>;
+export function IsoAlpha2Country(value: string): CurrencyIsoCode {
+    value = value.toUpperCase();
+    if (value.match(/^[A-Z]{2}$/)) {
+        return brand<CurrencyIsoCode>(value);
+    } else {
+        throw new Error("Invalid ISO 2-letter country format: " + value);
+    }
+}
 
 declare global {
     interface Date {
