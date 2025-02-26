@@ -1,4 +1,5 @@
 import { brand } from "../src/typing.ts";
+import { getNumberOfDays } from "../src/dates.ts";
 
 export type Entry<T> = {
     [K in keyof T]: [K, T[K]];
@@ -101,6 +102,41 @@ export type Pad2 = number | `0${number}`;
 
 export type MonthStr = "2024-07" | "2024-03" | `${number}-${Pad2}`;
 export type IsoDate = "2024-07-16" | "2024-03-13" | `${MonthStr}-${Pad2}`;
+// probably this should be moved to dates.ts...
+export function IsoDate(value: string): IsoDate {
+    const parts = value.split("-");
+    if (parts.length !== 3) {
+        throw new Error("Invalid ISO date format: " + value);
+    }
+    let yyyy, mm, dd;
+    try {
+        yyyy = NumericString(parts[0]);
+        mm = NumericString(parts[1]);
+        dd = NumericString(parts[2]);
+    } catch (error) {
+        if (error instanceof Error) {
+            error.message = "Invalid ISO date format: " + error.message;
+        }
+        throw error;
+    }
+    if (yyyy.length !== 4) {
+        throw new Error("Invalid ISO date format, year must consist of exactly 4 digits, not " + yyyy.length + ", supplied value was: " + value);
+    }
+    if (mm.length !== 2) {
+        throw new Error("Invalid ISO date format, month must consist of exactly 2 digits, not " + mm.length + ", supplied value was: " + value);
+    }
+    if (dd.length !== 2) {
+        throw new Error("Invalid ISO date format, day must consist of exactly 2 digits, not " + dd.length + ", supplied value was: " + value);
+    }
+    if (Number(mm) < 1 || Number(mm) > 12) {
+        throw new Error("Invalid ISO date format, month number must be within the range of 1-12, not " + mm + ", supplied value was: " + value);
+    }
+    const daysInMonth = getNumberOfDays({ year: Number(yyyy), month: Number(mm) });
+    if (Number(dd) < 1 || Number(dd) > daysInMonth) {
+        throw new Error("Invalid ISO date format, day number must be within the range of 1-" + daysInMonth + ", not " + dd + ", supplied value was: " + value);
+    }
+    return `${yyyy}-${mm}-${dd}`;
+}
 
 type SecondFraction = "" | `.${number}`;
 type IsoTime = "23:59:59" | "00:00:00.1234" | `${number}:${number}:${number}${SecondFraction}`;
