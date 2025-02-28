@@ -62,7 +62,7 @@ export const assertSubTree = <T extends unknown>(
             }
             const asKeyof = keyof(key, actualTree);
             if (!asKeyof) {
-                throw new ExpectationFailed(message + " missing expected key: " + key);
+                throw new ExpectationFailed(message + " missing expected key: " + key + ". Available keys: " + Object.keys(actualTree).join(", "));
             }
             assertSubTree(value, actualTree[asKeyof], message + "[" + key + "]");
         }
