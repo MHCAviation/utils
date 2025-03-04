@@ -1,4 +1,4 @@
-import type { IsoDate,MonthStr,Pad2 } from "../types/utility";
+import type { IsoDate,MonthStr,NumericString,Pad2 } from "../types/utility";
 
 export type AbsoluteMonth = {
     year: number,
@@ -13,6 +13,10 @@ export function getDatePart(dateTime: Date | `${IsoDate}${string}`): IsoDate {
     }
 }
 
+function pad4(value: number): NumericString {
+    return String(value).padStart(4, "0") as NumericString;
+}
+
 export function pad2(value: number): Pad2 {
     if (value < 10) {
         return `0${value}` as const;
@@ -22,7 +26,7 @@ export function pad2(value: number): Pad2 {
 }
 
 export function getMonthStr({ year, month }: AbsoluteMonth): MonthStr {
-    return `${year}-${pad2(month)}` as const;
+    return `${pad4(year)}-${pad2(month)}` as const;
 }
 
 export function getMonthDate(yearMonth: AbsoluteMonth, day: number): IsoDate {
