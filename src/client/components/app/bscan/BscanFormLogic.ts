@@ -1,0 +1,6 @@
+
+const TODAY_ISO = new Date().toISOString().slice(0, 10);
+const BSCAN_COVERAGE_START_DATE = new Date(TODAY_ISO);
+BSCAN_COVERAGE_START_DATE.setUTCFullYear(BSCAN_COVERAGE_START_DATE.getUTCFullYear() - 5);
+
+export { TODAY_ISO, BSCAN_COVERAGE_START_DATE };
