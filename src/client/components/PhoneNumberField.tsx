@@ -1,5 +1,6 @@
 import type { ClipboardEvent, KeyboardEvent } from "react";
-import React from "../React";
+import type React from "../React";
+import { assertNotNull } from "../../typing.ts";
 
 /** heuristic solution, but should work fine in majority of cases */
 function preventNonNumericInput(event: KeyboardEvent) {
@@ -17,8 +18,10 @@ function preventNonNumericPaste(event: ClipboardEvent) {
     const text = event.clipboardData.getData("text").replace(/\D/g, "");
     const input = event.currentTarget as HTMLInputElement;
     const { selectionStart, selectionEnd } = input;
-    input.value = input.value.slice(0, selectionStart!) + text + input.value.slice(selectionEnd!);
-    input.setSelectionRange(selectionStart! + text.length, selectionStart! + text.length);
+    assertNotNull(selectionStart);
+    assertNotNull(selectionEnd);
+    input.value = input.value.slice(0, selectionStart) + text + input.value.slice(selectionEnd);
+    input.setSelectionRange(selectionStart + text.length, selectionStart + text.length);
 }
 
 export default (React: React) => function PhoneNumberField(props: { value: string | null }) {
@@ -38,4 +41,4 @@ export default (React: React) => function PhoneNumberField(props: { value: strin
             value={props.value ?? ""}
         />
     </label>;
-}
+};

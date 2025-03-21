@@ -43,6 +43,12 @@ export const brand = <TBranded extends Brand<unknown, symbol>>(value: Unbrand<TB
     return value as {} as TBranded;
 };
 
+export function assertNotNull(value: unknown): asserts value is NonNullable<unknown> {
+    if (value === null || value === undefined) {
+        throw new Error("Unexpected null check failure");
+    }
+}
+
 /**
  * const nullable: string | null = getSomething();
  * const unsafeAssertion: string = nullable!;

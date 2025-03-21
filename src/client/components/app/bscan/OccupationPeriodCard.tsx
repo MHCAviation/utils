@@ -149,4 +149,4 @@ export default (React: React) => function OccupationPeriodCard(props: { occupati
             </>}
         </div>
     </fieldset>;
-}
+};

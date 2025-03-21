@@ -10,7 +10,7 @@
         "url": "ssh://git@github.com:MHCAviation/utils.git"
     },
     "scripts": {
-        "test": "npx tsc && npx eslint **/*.ts"
+        "test": "npx tsc && npx eslint --quiet \"**/*.{ts,tsx}\""
     },
     "devDependencies": {
         "@types/react": "^18.3.3",

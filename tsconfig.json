@@ -19,7 +19,8 @@
         "noEmit": true
     },
     "include": [
-        "**/*.ts"
+        "**/*.ts",
+        "**/*.tsx"
     ],
     "ts-node": {
         "transpileOnly": true
