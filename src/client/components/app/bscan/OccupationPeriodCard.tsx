@@ -1,11 +1,11 @@
 import type { OccupationPeriodReference } from "./types";
-import PhoneNumberFieldForReact from "../../PhoneNumberField.tsx";
+import UnreactedPhoneNumberField from "../../PhoneNumberField.tsx";
 import { BSCAN_COVERAGE_START_DATE } from "./BscanFormLogic.ts";
 import type React from "../../../React";
 import getForReact from "../../../getForReact.ts";
 
 export default (React: React) => function OccupationPeriodCard(props: { occupation: OccupationPeriodReference, removeReference: () => void }) {
-    const PhoneNumberField = getForReact(React, PhoneNumberFieldForReact);
+    const PhoneNumberField = getForReact(React, UnreactedPhoneNumberField);
     const { occupation, removeReference } = props;
     const startDate = !occupation.StartDate
         ? BSCAN_COVERAGE_START_DATE
@@ -25,7 +25,7 @@ export default (React: React) => function OccupationPeriodCard(props: { occupati
 
     return <fieldset name="occupationPeriodReference" className="occupation-period-form section-card" data-reference-type={occupation.ReferenceTypeValueId}>
         <input name="__changed" type="hidden" value={occupation.__changed ? "true" : ""}/>
-        <input name="OriginalApplicantTeferenceId" type="hidden" value={occupation.OriginalApplicantTeferenceId ?? ""}/>
+        <input name="OriginalApplicantReferenceId" type="hidden" value={occupation.OriginalApplicantReferenceId ?? ""}/>
         <input name="ApplicantReferenceRequestId" type="hidden" value={occupation.ApplicantReferenceRequestId ?? ""}/>
         <div className="occupation-period-dates-header">
             <label>

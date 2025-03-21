@@ -1,7 +1,7 @@
 
 export type ReferenceBase = {
     ReferenceTypeValueId: number | null,
-    OriginalApplicantTeferenceId?: number | null,
+    OriginalApplicantReferenceId?: number | null,
     ApplicantReferenceRequestId?: number | null,
     __changed?: boolean,
     Address?: string | null,
