@@ -63,3 +63,20 @@ export type PersonalReference = ReferenceBase & {
     RelationType: string,
     RelationFrequency: string,
 };
+
+export type ParentsNames = {
+    FatherFirstName: string | null,
+    FatherLastName: string | null,
+    MotherFirstName: string | null,
+    MotherMaidenLastName: string | null,
+};
+
+/** @see BscanGlobalFields.cs */
+export type BscanGlobalFields = ParentsNames & {
+    CRC_Valid_Till: string | null, // "2023-07-01T03:00:00+03:00"
+};
+
+export type BscanFormData = BscanGlobalFields & {
+    PersonalReferences: readonly PersonalReference[],
+    OccupationReferences: readonly OccupationPeriodReference[],
+};
