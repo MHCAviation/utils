@@ -5,6 +5,19 @@ body {
     --base-spacing: 27px;
     --side-line-distance: 9px;
 }
+
+.bscan-form-body {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--base-spacing);
+}
+.occupation-periods-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-spacing);
+}
 .occupation-periods-section {
     flex: 2;
     display: flex;
@@ -23,6 +36,15 @@ body {
 }
 .personal-reference-card-header .remove-entry-button {
     border-radius: 0 6px 0 6px;
+}
+
+.bscan-form ul {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-spacing);
+    margin-bottom: 0;
 }
 .section-card {
     background-color: white;
@@ -113,6 +135,32 @@ fieldset[name="globalFields"] > * {
         flex-wrap: wrap;
     }
 }
+.bscan-form-body label {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: #7E7E7E;
+    font-weight: normal;
+    margin-bottom: 0px; /* restoring after bootstrap */
+}
+
 .occupation-period-details-grid[data-reference-type-value-id=""] > label {
     justify-content: flex-start;
+}
+
+.bscan-form-body label > span {
+    cursor: pointer;
+}
+.bscan-form-body label.inline-label {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+.bscan-form-body label.inline-label input[type="checkbox"] {
+    margin: unset; /* damn bootstrap */
+    cursor: pointer;
+}
+.bscan-form-body label.inline-label input[type="text"] {
+    flex: 1;
 }
