@@ -5,6 +5,9 @@ body {
     --base-spacing: 27px;
     --side-line-distance: 9px;
 }
+.bscan-form h2 {
+    margin-bottom: 0px;
+}
 
 .bscan-form-body {
     display: flex;
@@ -45,6 +48,10 @@ body {
     flex-direction: column;
     gap: var(--base-spacing);
     margin-bottom: 0;
+}
+.bscan-form fieldset {
+    padding: 0;
+    border: 0;
 }
 .section-card {
     background-color: white;
@@ -124,18 +131,12 @@ fieldset[name="globalFields"] > * {
     box-sizing: border-box;
     min-width: calc(max(50% - var(--base-spacing) / 3 - var(--base-spacing) / 2, 200px));
 }
-@media (min-width: 992px) {
-    .bscan-form-body {
-        margin-left: 120px;
-        margin-right: 120px;
-    }
-}
 @media (max-width: 991px) {
     .occupation-period-form {
         flex-wrap: wrap;
     }
 }
-.bscan-form-body label {
+.bscan-form label {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -148,19 +149,19 @@ fieldset[name="globalFields"] > * {
     justify-content: flex-start;
 }
 
-.bscan-form-body label > span {
+.bscan-form label > span {
     cursor: pointer;
 }
-.bscan-form-body label.inline-label {
+.bscan-form label.inline-label {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 6px;
     align-items: center;
 }
-.bscan-form-body label.inline-label input[type="checkbox"] {
+.bscan-form label.inline-label input[type="checkbox"] {
     margin: unset; /* damn bootstrap */
     cursor: pointer;
 }
-.bscan-form-body label.inline-label input[type="text"] {
+.bscan-form label.inline-label input[type="text"] {
     flex: 1;
 }
