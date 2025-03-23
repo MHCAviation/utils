@@ -52,3 +52,14 @@ export type NewPeriodReference = PeriodReferenceBase & {
 };
 
 export type OccupationPeriodReference = EducationPeriodReference | WorkPeriodReference | GapPeriodReference | NewPeriodReference;
+
+export type PersonalReference = ReferenceBase & {
+    ReferenceTypeValueId: 1076,
+    RefereeName: string,
+    Occupation: string,
+    Email: string,
+    Phone: string | null,
+    RelationDuration: string,
+    RelationType: string,
+    RelationFrequency: string,
+};
