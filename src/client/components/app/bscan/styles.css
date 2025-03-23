@@ -1,0 +1,118 @@
+
+body {
+    --primary-color: #0055FF;
+    --primary-color-weak: rgba(0,85,255,0.42);
+    --base-spacing: 27px;
+    --side-line-distance: 9px;
+}
+.occupation-periods-section {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-spacing);
+}
+.personal-details-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--base-spacing);
+}
+.personal-reference-card-header {
+    display: flex;
+    justify-content: flex-end;
+}
+.personal-reference-card-header .remove-entry-button {
+    border-radius: 0 6px 0 6px;
+}
+.section-card {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 0 4px 0px #0055ff29;
+    overflow: auto;
+}
+.personal-details-section-body {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 27px;
+}
+fieldset[name="globalFields"],
+.personal-reference-card-body {
+    padding: 18px;
+    display: flex;
+    gap: 18px;
+}
+fieldset[name="globalFields"] {
+    flex-wrap: wrap;
+}
+.personal-reference-card-body {
+    flex-direction: column;
+}
+
+.personal-reference-card-body {
+    padding-top: 0;
+}
+.occupation-period-dates-header {
+    margin: calc(var(--base-spacing) - var(--side-line-distance));
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-shadow: -2px 0 var(--primary-color);
+    padding: var(--side-line-distance);
+}
+.period-total-years-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.period-total-years-badge {
+    margin-right: auto;
+    margin-bottom: var(--base-spacing);
+    margin-top: var(--base-spacing);
+    background-color: #4b6caf;
+    color: white;
+    padding: 6px;
+    border-radius: 6px;
+}
+.occupation-period-details-grid {
+    background-color: #0055ff0a; /* Work */
+    padding: var(--base-spacing);
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: var(--base-spacing);
+    row-gap: 18px;
+}
+.occupation-period-form {
+    display: flex;
+}
+.occupation-period-form[data-reference-type="1077"] .occupation-period-details-grid {
+    background-color: #1091790a; /* Education */
+}
+.occupation-period-form[data-reference-type="1075"] .occupation-period-details-grid {
+    background-color: #cf7e190a; /* Gap */
+}
+.occupation-period-form {
+    display: flex;
+}
+.occupation-period-details-grid > *,
+fieldset[name="globalFields"] > * {
+    flex: 1;
+    box-sizing: border-box;
+    min-width: calc(max(50% - var(--base-spacing) / 3 - var(--base-spacing) / 2, 200px));
+}
+@media (min-width: 992px) {
+    .bscan-form-body {
+        margin-left: 120px;
+        margin-right: 120px;
+    }
+}
+@media (max-width: 991px) {
+    .occupation-period-form {
+        flex-wrap: wrap;
+    }
+}
+.occupation-period-details-grid[data-reference-type-value-id=""] > label {
+    justify-content: flex-start;
+}
