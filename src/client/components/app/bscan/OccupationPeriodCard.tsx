@@ -4,7 +4,10 @@ import { BSCAN_COVERAGE_START_DATE } from "./BscanFormLogic.ts";
 import type React from "../../../React";
 import getForReact from "../../../getForReact.ts";
 
-export default (React: React) => function OccupationPeriodCard(props: { occupation: OccupationPeriodReference, removeReference: () => void }) {
+export default (React: React) => function OccupationPeriodCard(props: {
+    occupation: OccupationPeriodReference,
+    removeReference?: () => void,
+}) {
     const PhoneNumberField = getForReact(React, UnreactedPhoneNumberField);
     const { occupation, removeReference } = props;
     const startDate = !occupation.StartDate
@@ -41,9 +44,14 @@ export default (React: React) => function OccupationPeriodCard(props: { occupati
             </label>
             <div className="period-total-years-panel">
                 <div className="period-total-years-badge">{totalYears} years</div>
-                <button className="remove-entry-button" type="button" title="Delete Reference" onClick={removeReference}>
+                {!removeReference ? <span></span> : <button
+                    className="remove-entry-button"
+                    type="button"
+                    title="Delete Reference"
+                    onClick={removeReference}
+                >
                     <img src="/images/Icons/bin-red.svg" alt="bin-icon" />
-                </button>
+                </button>}
             </div>
             <label>
                 <span>Start Date</span>

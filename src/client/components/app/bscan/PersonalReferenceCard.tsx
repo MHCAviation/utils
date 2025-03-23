@@ -3,14 +3,22 @@ import UnreactedPhoneNumberField from "../../PhoneNumberField.tsx";
 import getForReact from "../../../getForReact.ts";
 import type { PersonalReference } from "./types.ts";
 
-export default (React: React) => function PersonalReferenceCard(props: { person: PersonalReference, removeReference: () => void }) {
+export default (React: React) => function PersonalReferenceCard(props: {
+    person: PersonalReference,
+    removeReference?: () => void,
+}) {
     const PhoneNumberField = getForReact(React, UnreactedPhoneNumberField);
     const { person, removeReference } = props;
     return <fieldset name="personalReference">
         <div className="personal-reference-card-header">
-            <button className="remove-entry-button" type="button" title="Delete Reference" onClick={removeReference}>
+            {!removeReference ? <span></span> : <button
+                className="remove-entry-button"
+                type="button"
+                title="Delete Reference"
+                onClick={removeReference}
+            >
                 <img src="/images/Icons/bin-red.svg" alt="bin-icon" />
-            </button>
+            </button>}
         </div>
         <input name="__changed" type="hidden" value={person.__changed ? "true" : ""}/>
         <input name="ReferenceTypeValueId" type="hidden" value="1076"/>
