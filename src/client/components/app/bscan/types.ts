@@ -73,7 +73,6 @@ export type ParentsNames = {
 
 /** @see BscanGlobalFields.cs */
 export type BscanGlobalFields = ParentsNames & {
-    CRC_Valid_Till: string | null, // "2023-07-01T03:00:00+03:00"
 };
 
 export type BscanFormData = BscanGlobalFields & {
