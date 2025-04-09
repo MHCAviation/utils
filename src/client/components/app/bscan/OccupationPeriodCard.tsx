@@ -4,6 +4,15 @@ import { BSCAN_COVERAGE_START_DATE } from "./BscanFormLogic.ts";
 import type React from "../../../React";
 import getForReact from "../../../getForReact.ts";
 
+function ignoreIncompleteInput(e: React.ChangeEvent) {
+    if (!e.target.checkValidity()) {
+        e.stopPropagation();
+        e.preventDefault();
+    } else {
+        e.target.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+}
+
 export default (React: React) => function OccupationPeriodCard(props: {
     occupation: OccupationPeriodReference,
     removeReference?: () => void,
@@ -37,8 +46,9 @@ export default (React: React) => function OccupationPeriodCard(props: {
                     ref={el => el && el.setCustomValidity(datesError)}
                     title={datesError || undefined}
                     name="EndDate" type="date"
-                    value={occupation.EndDate?.slice(0, 10) ?? ""}
-                    min={occupation.StartDate?.slice(0, 10) ?? undefined}
+                    defaultValue={occupation.EndDate?.slice(0, 10) ?? ""}
+                    min={occupation.StartDate?.slice(0, 10) ?? "1900-01-01"}
+                    max={"9999-12-31"}
                     placeholder="Current"
                 />
             </label>
@@ -59,9 +69,10 @@ export default (React: React) => function OccupationPeriodCard(props: {
                     ref={el => el && el.setCustomValidity(datesError)}
                     title={datesError || undefined}
                     name="StartDate" type="date"
-                    value={occupation.StartDate?.slice(0, 10) ?? ""}
-                    max={occupation.EndDate?.slice(0, 10) ?? undefined}
+                    defaultValue={occupation.StartDate?.slice(0, 10) ?? ""}
+                    max={occupation.EndDate?.slice(0, 10) ?? "9999-12-31"}
                     min="1900-01-01"
+                    onChange={ignoreIncompleteInput}
                     required={true}
                 />
             </label>
