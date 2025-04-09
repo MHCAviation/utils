@@ -1,3 +1,4 @@
+import type { IsoDate, IsoDateTime, IsoDateTimeOffset } from "../../../../../types/utility.ts";
 
 export type ReferenceBase = {
     ReferenceTypeValueId: number | null,
@@ -8,8 +9,8 @@ export type ReferenceBase = {
 };
 
 export type PeriodReferenceBase = ReferenceBase & {
-    StartDate: string, // "2023-07-01T03:00:00+03:00"
-    EndDate: string | null, // null
+    StartDate: IsoDate | IsoDateTimeOffset | IsoDateTime, // "2023-07-01T03:00:00+03:00"
+    EndDate: IsoDate | IsoDateTimeOffset | IsoDateTime | null, // null
 };
 
 type ActualOccupationReference = PeriodReferenceBase & {
