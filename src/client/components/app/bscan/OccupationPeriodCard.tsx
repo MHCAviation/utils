@@ -4,7 +4,7 @@ import { BSCAN_COVERAGE_START_DATE } from "./BscanFormLogic.ts";
 import type React from "../../../React";
 import getForReact from "../../../getForReact.ts";
 
-function ignoreIncompleteInput(e: React.ChangeEvent) {
+function ignoreIncompleteInput(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.checkValidity()) {
         e.stopPropagation();
         e.preventDefault();
