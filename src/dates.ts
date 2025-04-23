@@ -1,4 +1,4 @@
-import type { IsoDate,IsoTimeUpToSeconds,MonthStr,NumericString,Pad2 } from "../types/utility";
+import type { IsoDate,IsoTimeUpToMinutes,MonthStr,NumericString,Pad2 } from "../types/utility";
 
 export type AbsoluteMonth = {
     year: number,
@@ -13,8 +13,8 @@ export function getDatePart(dateTime: Date | `${IsoDate}${string}`): IsoDate {
     }
 }
 
-export function getTimePart(datetime: `${IsoDate}${" " | "T"}${IsoTimeUpToSeconds}${string}`): IsoTimeUpToSeconds {
-    return datetime.slice(11, 16) as IsoTimeUpToSeconds;
+export function getTimePart(datetime: `${IsoDate}${" " | "T"}${IsoTimeUpToMinutes}${string}`): IsoTimeUpToMinutes {
+    return datetime.slice(11, 16) as IsoTimeUpToMinutes;
 }
 
 function pad4(value: number): NumericString {

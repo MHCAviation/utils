@@ -139,7 +139,8 @@ export function IsoDate(value: string): IsoDate {
 }
 
 type SecondFraction = "" | `.${number}`;
-export type IsoTimeUpToSeconds = "23:59:59" | `${number}:${number}:${number}`;
+export type IsoTimeUpToMinutes = "23:59" | `${number}:${number}`;
+type IsoTimeUpToSeconds = "23:59:59" | `${IsoTimeUpToMinutes}:${number}`;
 type IsoTime = IsoTimeUpToSeconds | "00:00:00.1234" | `${number}:${number}:${number}${SecondFraction}`;
 export type IsoDateTimeBase<TTimeZoneOffset extends string> = `${IsoDate}T${IsoTime}${TTimeZoneOffset}`;
 /** as serialized from C# System.DateTime by Newtonsoft.Json */
