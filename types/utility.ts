@@ -82,6 +82,14 @@ export function asEmailOrFail(value: string): EmailAddress {
 export type HttpUrl = `http${"s" | ""}://${string}.${string}`;
 export type Pathname = `/${string}`;
 
+const PixelsTag = Symbol("Pixels");
+export type Pixels = Brand<number, typeof PixelsTag>;
+
+export type ImageDimensions = {
+    width: Pixels,
+    height: Pixels,
+};
+
 const Base64Tag = Symbol("Base64");
 export type Base64 = Brand<string, typeof Base64Tag>;
 
