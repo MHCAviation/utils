@@ -1,15 +1,19 @@
 import type { IsoDate, IsoDateTime, IsoDateTimeOffset } from "../../../../../types/utility.ts";
 
 type SavedReferenceId = {
+    __unsavedId?: null,
     OriginalApplicantReferenceId: number,
     ApplicantReferenceRequestId: number | null,
 } | {
+    __unsavedId?: null,
     OriginalApplicantReferenceId: number | null,
     ApplicantReferenceRequestId: number,
 };
 
 type UnsavedReferenceId = {
     __unsavedId: number,
+    OriginalApplicantReferenceId?: null,
+    ApplicantReferenceRequestId?: null,
 };
 
 export type ReferenceBase = {

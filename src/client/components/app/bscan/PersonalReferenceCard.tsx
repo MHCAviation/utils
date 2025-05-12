@@ -25,9 +25,9 @@ export default (React: React) => function PersonalReferenceCard(props: {
         </div>
         <input name="__changed" type="hidden" onChange={propagated} value={person.__changed ? "true" : ""}/>
         <input name="ReferenceTypeValueId" type="hidden" value="1076"/>
-        <input name="OriginalApplicantReferenceId" type="hidden" onChange={propagated} value={"OriginalApplicantReferenceId" in person ? person.OriginalApplicantReferenceId ?? "" : ""}/>
-        <input name="ApplicantReferenceRequestId" type="hidden" onChange={propagated} value={"ApplicantReferenceRequestId" in person ? person.ApplicantReferenceRequestId ?? "" : ""}/>
-        <input name="__unsavedId" type="hidden" onChange={propagated} value={"__unsavedId" in person ? person.__unsavedId ?? "" : ""}/>
+        <input name="OriginalApplicantReferenceId" type="hidden" onChange={propagated} value={person.OriginalApplicantReferenceId ?? ""}/>
+        <input name="ApplicantReferenceRequestId" type="hidden" onChange={propagated} value={person.ApplicantReferenceRequestId ?? ""}/>
+        <input name="__unsavedId" type="hidden" onChange={propagated} value={person.__unsavedId ?? ""}/>
         <div className="personal-reference-card-body">
             <label>
                 <span>Name</span>

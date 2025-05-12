@@ -56,9 +56,8 @@ function getRefFormValues<T extends ReferenceBase>(fieldset: HTMLFieldSetElement
         ? null : Number(result["OriginalApplicantReferenceId"]);
     result["ApplicantReferenceRequestId"] = !result["ApplicantReferenceRequestId"]
         ? null : Number(result["ApplicantReferenceRequestId"]);
-    if (result["__unsavedId"]) {
-        result["__unsavedId"] = Number(result["__unsavedId"]);
-    }
+    result["__unsavedId"] = !result["__unsavedId"]
+        ? null : Number(result["__unsavedId"]);
 
     if ([...fieldset.elements].includes(changedInput)) {
         result.__changed = true;
