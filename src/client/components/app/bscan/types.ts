@@ -9,7 +9,7 @@ type SavedReferenceId = {
 };
 
 type UnsavedReferenceId = {
-    __unsavedId: symbol,
+    __unsavedId: number,
 };
 
 export type ReferenceBase = {

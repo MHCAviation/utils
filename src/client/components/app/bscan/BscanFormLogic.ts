@@ -1,5 +1,6 @@
 import type { BscanFormData,BscanGlobalFields,OccupationPeriodReference, PeriodReferenceBase,PersonalReference, ReferenceBase } from "./types.ts";
 import type { FormEvent } from "react";
+import { getRefUid } from "../../../../utils/ReferenceUid.ts";
 
 const TODAY_ISO = new Date().toISOString().slice(0, 10);
 const BSCAN_COVERAGE_START_DATE = new Date(TODAY_ISO);
@@ -142,7 +143,7 @@ export function BscanFormLogic(
                 ...formData.PersonalReferences,
                 {
                     ReferenceTypeValueId: 1076,
-                    __unsavedId: Symbol("New Person"),
+                    __unsavedId: getRefUid(Symbol("New Person")),
                     __changed: true,
                 } as PersonalReference,
             ],

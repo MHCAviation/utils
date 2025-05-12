@@ -1,5 +1,6 @@
 import type { PeriodReferenceBase } from "./types.ts";
 import type React from "../../../React";
+import { getRefUid } from "../../../../utils/ReferenceUid.ts";
 
 function getDaysBetween(gapStartDate: Date, gapEndDate: Date) {
     const gapMs = gapEndDate.getTime() - gapStartDate.getTime();
@@ -24,7 +25,7 @@ export default (React: React) => function GapWarningPeriod(props: {
                     ReferenceTypeValueId: 0,
                     StartDate: gapStartDate.toISOString(),
                     EndDate: gapEndDate.toISOString(),
-                    __unsavedId: Symbol("New Occupation"),
+                    __unsavedId: getRefUid(Symbol("New Occupation")),
                 });
             }}/>
         </label>

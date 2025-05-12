@@ -42,6 +42,7 @@ export default (React: React) => function OccupationPeriodCard(props: {
         <input name="__changed" type="hidden" onChange={propagated} value={occupation.__changed ? "true" : ""}/>
         <input name="OriginalApplicantReferenceId" type="hidden" onChange={propagated} value={"OriginalApplicantReferenceId" in occupation ? occupation.OriginalApplicantReferenceId ?? "" : ""}/>
         <input name="ApplicantReferenceRequestId" type="hidden" onChange={propagated} value={"ApplicantReferenceRequestId" in occupation ? occupation.ApplicantReferenceRequestId ?? "" : ""}/>
+        <input name="__unsavedId" type="hidden" onChange={propagated} value={"__unsavedId" in occupation ? occupation.__unsavedId ?? "" : ""}/>
         <div className="occupation-period-dates-header">
             <label>
                 <span>End Date</span>
