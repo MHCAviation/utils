@@ -40,8 +40,8 @@ export default (React: React) => function OccupationPeriodCard(props: {
 
     return <fieldset name="occupationPeriodReference" className="occupation-period-form section-card" data-reference-type={occupation.ReferenceTypeValueId}>
         <input name="__changed" type="hidden" onChange={propagated} value={occupation.__changed ? "true" : ""}/>
-        <input name="OriginalApplicantReferenceId" type="hidden" onChange={propagated} value={occupation.OriginalApplicantReferenceId ?? ""}/>
-        <input name="ApplicantReferenceRequestId" type="hidden" onChange={propagated} value={occupation.ApplicantReferenceRequestId ?? ""}/>
+        <input name="OriginalApplicantReferenceId" type="hidden" onChange={propagated} value={"OriginalApplicantReferenceId" in occupation ? occupation.OriginalApplicantReferenceId ?? "" : ""}/>
+        <input name="ApplicantReferenceRequestId" type="hidden" onChange={propagated} value={"ApplicantReferenceRequestId" in occupation ? occupation.ApplicantReferenceRequestId ?? "" : ""}/>
         <div className="occupation-period-dates-header">
             <label>
                 <span>End Date</span>

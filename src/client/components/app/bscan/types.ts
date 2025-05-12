@@ -1,12 +1,22 @@
 import type { IsoDate, IsoDateTime, IsoDateTimeOffset } from "../../../../../types/utility.ts";
 
+type SavedReferenceId = {
+    OriginalApplicantReferenceId: number,
+    ApplicantReferenceRequestId: number | null,
+} | {
+    OriginalApplicantReferenceId: number | null,
+    ApplicantReferenceRequestId: number,
+};
+
+type UnsavedReferenceId = {
+    __unsavedId: symbol,
+};
+
 export type ReferenceBase = {
     ReferenceTypeValueId: number | null,
-    OriginalApplicantReferenceId?: number | null,
-    ApplicantReferenceRequestId?: number | null,
     __changed?: boolean,
     Address?: string | null,
-};
+} & (SavedReferenceId | UnsavedReferenceId);
 
 export type PeriodReferenceBase = ReferenceBase & {
     StartDate: IsoDate | IsoDateTimeOffset | IsoDateTime, // "2023-07-01T03:00:00+03:00"

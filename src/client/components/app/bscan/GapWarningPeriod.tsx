@@ -24,6 +24,7 @@ export default (React: React) => function GapWarningPeriod(props: {
                     ReferenceTypeValueId: 0,
                     StartDate: gapStartDate.toISOString(),
                     EndDate: gapEndDate.toISOString(),
+                    __unsavedId: Symbol("New Person"),
                 });
             }}/>
         </label>

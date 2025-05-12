@@ -7,7 +7,6 @@ BSCAN_COVERAGE_START_DATE.setUTCFullYear(BSCAN_COVERAGE_START_DATE.getUTCFullYea
 
 export { TODAY_ISO, BSCAN_COVERAGE_START_DATE };
 
-
 export function ensureArray(value: NodeList | Element | null) {
     if (!value) {
         return [];
