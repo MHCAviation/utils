@@ -228,3 +228,25 @@ fieldset[name="globalFields"] > * {
     border-color: grey;
     cursor: not-allowed;
 }
+
+li.changed,
+button[type="submit"]:not(:disabled) {
+    box-shadow: 0 0 6px 2px #739dfd;
+}
+.gap-warning-period {
+    margin-left: calc(var(--base-spacing) - var(--side-line-distance));
+    margin-right: calc(var(--base-spacing));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--base-spacing);
+}
+.gap-days-holder {
+    width: fit-content;
+    text-align: center;
+    font-weight: bold;
+    background-color: #876a46;
+    color: white;
+    border-radius: 6px;
+    padding: 3px 9px;
+}
