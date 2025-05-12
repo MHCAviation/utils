@@ -24,6 +24,9 @@ function preventNonNumericPaste(event: ClipboardEvent) {
     input.setSelectionRange(selectionStart + text.length, selectionStart + text.length);
 }
 
+function propagated() {
+}
+
 export default (React: React) => function PhoneNumberField(props: { value: string | null }) {
     return <label>
         <span>Contact Telephone Number</span>
@@ -38,6 +41,7 @@ export default (React: React) => function PhoneNumberField(props: { value: strin
             min="1000"
             step="1"
             placeholder="0123456789..."
+            onChange={propagated}
             value={props.value ?? ""}
         />
     </label>;
