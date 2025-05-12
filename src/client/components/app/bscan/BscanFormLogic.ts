@@ -142,6 +142,7 @@ export function BscanFormLogic(
                 ...formData.PersonalReferences,
                 {
                     ReferenceTypeValueId: 1076,
+                    __unsavedId: Symbol("New Person"),
                     __changed: true,
                 } as PersonalReference,
             ],
