@@ -19,7 +19,7 @@ export default (React: React) => function GapWarningPeriod(props: {
         </div>
         <label className="add-entry-button text-button">
             <div>Add Reference</div>
-            <input className="plus-icon" type="checkbox" name="Add missing Reference for the gap" checked={false} required={true} onInput={() => {
+            <input className="plus-icon" type="checkbox" name="Add missing Reference for the gap" onChange={() => {}} checked={false} required={true} onInput={() => {
                 addReference({
                     ReferenceTypeValueId: 0,
                     StartDate: gapStartDate.toISOString(),
