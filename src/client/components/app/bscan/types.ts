@@ -62,7 +62,7 @@ export type NewPeriodReference = PeriodReferenceBase & {
     ReferenceTypeValueId: null,
 };
 
-export type OccupationPeriodReference = EducationPeriodReference | WorkPeriodReference | GapPeriodReference | NewPeriodReference;
+export type OccupationPeriodReference = ReferenceBase & (EducationPeriodReference | WorkPeriodReference | GapPeriodReference | NewPeriodReference);
 
 export type PersonalReference = ReferenceBase & {
     ReferenceTypeValueId: 1076,
