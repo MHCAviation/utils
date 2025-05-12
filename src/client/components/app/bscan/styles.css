@@ -165,3 +165,66 @@ fieldset[name="globalFields"] > * {
 .bscan-form label.inline-label input[type="text"] {
     flex: 1;
 }
+
+
+.info-icon,
+.add-entry-button input[type="checkbox"].plus-icon {
+    background-color: var(--primary-color);
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bscan-form .text-button {
+    border-color: var(--primary-color);
+    border-width: 1px;
+    background-color: white;
+    height: unset;
+    color: var(--primary-color);
+    font-weight: bold;
+    border-radius: 6px;
+}
+.bscan-form .add-entry-button {
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    max-width: unset;
+    gap: var(--base-spacing);
+    cursor: pointer;
+    border-style: solid;
+}
+.bscan-form .add-entry-button input[type="checkbox"] {
+    pointer-events: none;
+    margin: 0;
+    align-items: stretch;
+    appearance: none;
+    border-radius: 6px;
+    overflow: hidden;
+}
+.bscan-form .add-entry-button input[type="checkbox"]:before {
+    content: "+";
+    background-color: var(--primary-color);
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+.bscan-form .add-entry-button:hover,
+.bscan-form .add-entry-button:focus,
+.bscan-form .add-entry-button:focus-within,
+.bscan-form .add-entry-button:active {
+    background-color: var(--primary-color);
+    color: white;
+}
+.bscan-form .text-button:disabled {
+    background-color: #cfcfcf;
+    color: grey;
+    border-color: grey;
+    cursor: not-allowed;
+}
