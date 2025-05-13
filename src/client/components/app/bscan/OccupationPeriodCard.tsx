@@ -87,6 +87,7 @@ export default (React: React) => function OccupationPeriodCard(props: {
                 <select name="ReferenceTypeValueId" onChange={propagated} value={occupation.ReferenceTypeValueId ?? ""} required={true}>
                     <option value="">Not Selected</option>
                     <option value="1077">Education</option>
+                    <option value="1078">Contracting Agency</option>
                     <option value="1079">Regular Employment</option>
                     <option value="1080">Self-Employment</option>
                     <option value="1082">Voluntary</option>
