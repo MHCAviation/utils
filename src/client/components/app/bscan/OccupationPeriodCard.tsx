@@ -53,6 +53,7 @@ export default (React: React) => function OccupationPeriodCard(props: {
                     defaultValue={occupation.EndDate?.slice(0, 10) ?? ""}
                     min={occupation.StartDate?.slice(0, 10) ?? "1900-01-01"}
                     max={"9999-12-31"}
+                    onChange={ignoreIncompleteInput}
                     placeholder="Current"
                 />
             </label>
