@@ -71,6 +71,23 @@ export function getNumberOfDays({ year, month }: AbsoluteMonth) {
     return endDateObj.getUTCDate();
 }
 
+/**
+ * 2025-01-25 - 2025-01-10 = 15
+ * 2025-01-25 - 2025-01-25 = 0
+ * 2025-03-01 - 2025-02-28 = 1
+ * 2024-03-01 - 2024-02-28 = 2
+ */
+export function daysBetween(endDate: IsoDate, startDate: IsoDate) {
+    endDate = getDatePart(endDate); // just in case we somehow receive DateTime string here
+    startDate = getDatePart(startDate);
+    const endDateObj = new Date(endDate);
+    const startDateObj = new Date(startDate);
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const msDiff = endDateObj.getTime() - startDateObj.getTime();
+    // God bless UTC for not observing the goddamn DST
+    return msDiff / msPerDay;
+}
+
 export function getPastMonth(baseDate: Date): AbsoluteMonth {
     const endDateObj = new Date(baseDate.getTime());
     endDateObj.setUTCDate(0);
