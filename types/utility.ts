@@ -1,5 +1,5 @@
 import { brand } from "../src/typing.ts";
-import { getNumberOfDays } from "../src/dates.ts";
+import { getNumberOfDays,pad2 } from "../src/dates.ts";
 
 export type Entry<T> = {
     [K in keyof T]: [K, T[K]];
@@ -148,6 +148,15 @@ export function IsoDate(value: string): IsoDate {
 
 type SecondFraction = "" | `.${number}`;
 export type IsoTimeUpToMinutes = "23:59" | `${Pad2}:${Pad2}`;
+export function IsoTimeUpToMinutes(value: string): IsoTimeUpToMinutes {
+    const match = value.match(/^(0?\d|1\d|2[0-3]):([0-5]\d)$/);
+    if (!match) {
+        throw new Error("Invalid HH:MM value: " + value);
+    }
+    const [, hh, mm] = match;
+    return `${pad2(Number(hh))}:${pad2(Number(mm))}`;
+}
+
 type IsoTimeUpToSeconds = "23:59:59" | `${IsoTimeUpToMinutes}:${Pad2}`;
 type IsoTime = IsoTimeUpToSeconds | "00:00:00.1234" | `${number}:${number}:${number}${SecondFraction}`;
 export type IsoDateTimeBase<TTimeZoneOffset extends string> = `${IsoDate}T${IsoTime}${TTimeZoneOffset}`;
