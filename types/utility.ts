@@ -156,6 +156,13 @@ export function IsoTimeUpToMinutes(value: string): IsoTimeUpToMinutes {
     const [, hh, mm] = match;
     return `${pad2(Number(hh))}:${pad2(Number(mm))}`;
 }
+export function asIsoTimeUpToMinutes(value: string): IsoTimeUpToMinutes | null {
+    try {
+        return IsoTimeUpToMinutes(value);
+    } catch (error) {
+        return null;
+    }
+}
 
 type IsoTimeUpToSeconds = "23:59:59" | `${IsoTimeUpToMinutes}:${Pad2}`;
 type IsoTime = IsoTimeUpToSeconds | "00:00:00.1234" | `${number}:${number}:${number}${SecondFraction}`;

@@ -142,3 +142,17 @@ export function getMonthFullName(month: number) {
         "July", "August", "September", "October", "November", "December",
     ][month - 1];
 }
+
+export function formatDuration(totalMinutes: number): IsoTimeUpToMinutes {
+    const hh = Math.floor(totalMinutes / 60);
+    const mm = pad2(Math.floor(totalMinutes % 60));
+    return `${hh}:${mm}`;
+}
+
+export function unformatDuration(duration: IsoTimeUpToMinutes): number {
+    if (!duration.trim()) {
+        return 0;
+    }
+    const [hours, minutes] = duration.split(":");
+    return +hours * 60 + Number(minutes ?? "00");
+}
