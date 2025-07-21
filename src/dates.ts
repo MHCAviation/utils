@@ -111,16 +111,14 @@ export function incrementMonth({ year, month }: AbsoluteMonth) {
     };
 }
 
-export function decrementDay(date: IsoDate): IsoDate {
+export function incrementDay(date: IsoDate, step = 1): IsoDate {
     const dateObj = new Date(date);
-    dateObj.setUTCDate(dateObj.getUTCDate() - 1);
+    dateObj.setUTCDate(dateObj.getUTCDate() + step);
     return getDatePart(dateObj);
 }
 
-export function incrementDay(date: IsoDate): IsoDate {
-    const dateObj = new Date(date);
-    dateObj.setUTCDate(dateObj.getUTCDate() + 1);
-    return getDatePart(dateObj);
+export function decrementDay(date: IsoDate): IsoDate {
+    return incrementDay(date, -1);
 }
 
 /** 0 = Sunday */
