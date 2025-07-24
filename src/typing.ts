@@ -1,6 +1,17 @@
 import type { Brand,Entries,JsonValue,Keys, Unbrand } from "../types/utility";
 
+/**
+ * conceptually, this is same thing as the `satisfies` operator in typescript: it broadens the type to
+ * avoid declaring a variable - allows describing the type structure with the initial state of the data
+ * @see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator
+ * @deprecated let's use its alias from now on: `satisfies<>()`
+ */
 export const typed = <T,>(v: T) => v;
+/**
+ * I tried to rewrite everything from `typed<>()` to the built-in `satisfies` operator, but
+ * in some places typescript still narrowed the type to the value ignoring the operator =/
+ */
+export const satisfies = typed;
 
 /** typeof of this symbol will never be assignable to anything but `any` */
 const Any = Symbol("Any");
