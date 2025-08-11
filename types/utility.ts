@@ -164,8 +164,8 @@ export function asIsoTimeUpToMinutes(value: string): IsoTimeUpToMinutes | null {
     }
 }
 
-type IsoTimeUpToSeconds = "23:59:59" | `${IsoTimeUpToMinutes}:${Pad2}`;
-type IsoTime = IsoTimeUpToSeconds | "00:00:00.1234" | `${number}:${number}:${number}${SecondFraction}`;
+export type IsoTimeUpToSeconds = "23:59:59" | `${IsoTimeUpToMinutes}:${Pad2}`;
+export type IsoTime = IsoTimeUpToSeconds | "00:00:00.1234" | `${number}:${number}:${number}${SecondFraction}`;
 export type IsoDateTimeBase<TTimeZoneOffset extends string> = `${IsoDate}T${IsoTime}${TTimeZoneOffset}`;
 /** as serialized from C# System.DateTime by Newtonsoft.Json */
 export type IsoDateTime = IsoDateTimeBase<"" | "Z">;

@@ -20,11 +20,16 @@ export function getRefUid(reference: object | symbol) {
         refToUid.set(reference, newUid);
     } catch (error) {
         if (typeof reference === "symbol" &&
-            error instanceof TypeError &&
-            error.message.includes("must be an object")
+            error instanceof TypeError && (
+                error.message.includes("must be an object") ||
+                error.message.includes("Attempted to set a non-object key")
+            )
         ) {
             refToUidPermanent.set(reference, newUid);
         } else {
+            if (error instanceof Error) {
+                error.message = "Failed to get ref of " + String(reference) + " - " + error.message;
+            }
             throw error;
         }
     }
