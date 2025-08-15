@@ -11,9 +11,13 @@ const CompanyNameTag = Symbol("CompanyName");
 export type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${string} - ${string}`;
 export type CompanyName = Brand<CompanyNameLiteral, typeof CompanyNameTag>;
 export const CompanyName = (value: string): CompanyName => {
-    if (!value.match(/^(\w+\s*)+-\s*\w+$/) &&
+    if (!value.match(/^(\w+\s*)+-(\s*\w+)+$/) &&
         value.toUpperCase() !== "LSN - NVD EUR EMPL" &&
-        value.toUpperCase() !== "MHCAVIATION SIA"
+        value.toUpperCase() !== "MHCAVIATION SIA" &&
+        value.toUpperCase() !== "AIR ATLANTA AVIA SERVICES" &&
+        value.toUpperCase() !== "F2R" &&
+        value.toUpperCase() !== "XF2R" &&
+        value.toUpperCase() !== "RECRUITMENT DATABASE"
     ) {
         throw new Error("Supplied COMPANYNAME has invalid format: " + value);
     }
