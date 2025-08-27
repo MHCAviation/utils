@@ -143,7 +143,7 @@ export function getMonthFromShortName(shortName: MonthShortName | string): numbe
     const index = MONTH_SHORT_NAMES
         .map(cs => cs.toUpperCase())
         .indexOf(shortName.toUpperCase());
-    if (index) {
+    if (index > -1) {
         return index + 1;
     } else {
         throw new Error("Unexpected month short name: " + shortName);
