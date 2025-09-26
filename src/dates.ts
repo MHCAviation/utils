@@ -117,6 +117,12 @@ export function incrementDay(date: IsoDate, step = 1): IsoDate {
     return getDatePart(dateObj);
 }
 
+export function incrementYear(date: IsoDate, value = 1): IsoDate {
+    const dateObj = new Date(date);
+    dateObj.setUTCFullYear(dateObj.getUTCFullYear() + value);
+    return getDatePart(dateObj);
+}
+
 export function decrementDay(date: IsoDate): IsoDate {
     return incrementDay(date, -1);
 }
