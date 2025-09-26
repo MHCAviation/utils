@@ -1,17 +1,15 @@
 import type { Brand,Entries,JsonValue,Keys, Unbrand } from "../types/utility";
 
 /**
- * conceptually, this is same thing as the `satisfies` operator in typescript: it broadens the type to
- * avoid declaring a variable - allows describing the type structure with the initial state of the data
+ * conceptually, this is somewhat similar to the `satisfies` operator in typescript: it allows you to specify the intended
+ * type of the expression without declaring a variable - allows describing the type structure with the initial state of the data
  * @see https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator
- * @deprecated let's use its alias from now on: `satisfies<>()`
+ * though unlike `satisfies`, this function allows to _broaden_ the type, like `someStateField: typed<null | string>(null)`
+ * will allow you to combine type definition with a value definition for ReturnType<> even if initial value is null
+ * @deprecated in favour of broaden
  */
 export const typed = <T,>(v: T) => v;
-/**
- * I tried to rewrite everything from `typed<>()` to the built-in `satisfies` operator, but
- * in some places typescript still narrowed the type to the value ignoring the operator =/
- */
-export const satisfies = typed;
+export const broaden = typed;
 
 /** typeof of this symbol will never be assignable to anything but `any` */
 const Any = Symbol("Any");
