@@ -7,6 +7,12 @@ export function parseCOMPANYNAME(COMPANYNAME: CompanyName) {
             client: "AAI",
             currency: "USD",
         };
+    } else if (COMPANYNAME.toUpperCase() === "_TEST EUR") {
+        return {
+            partnerCompany: "F2R",
+            client: "TEST",
+            currency: "EUR",
+        };
     }
     // CRM IR - ABBEUR
     // F2R - EAFEUR

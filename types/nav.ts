@@ -8,7 +8,7 @@ const UpperCased = Symbol("UpperCased");
 export type UpperCased<T> = T & { [k in typeof UpperCased]: undefined };
 
 const CompanyNameTag = Symbol("CompanyName");
-export type CompanyNameLiteral = "Airborne - Malta" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${string} - ${string}`;
+export type CompanyNameLiteral = "Airborne - Malta" | "_TEST EUR" | "HEL - AAIUSD" | "F2R - LALEUR" | "F2R - SLYEUR" | "F2R - DATEUR" | `${string} - ${string}`;
 export type CompanyName = Brand<CompanyNameLiteral, typeof CompanyNameTag>;
 export const CompanyName = (value: string): CompanyName => {
     if (!value.match(/^(\w+\s*)+-(\s*\w+)+$/) &&
@@ -17,7 +17,8 @@ export const CompanyName = (value: string): CompanyName => {
         value.toUpperCase() !== "AIR ATLANTA AVIA SERVICES" &&
         value.toUpperCase() !== "F2R" &&
         value.toUpperCase() !== "XF2R" &&
-        value.toUpperCase() !== "RECRUITMENT DATABASE"
+        value.toUpperCase() !== "RECRUITMENT DATABASE" &&
+        value.toUpperCase() !== "_TEST EUR"
     ) {
         throw new Error("Supplied COMPANYNAME has invalid format: " + value);
     }
