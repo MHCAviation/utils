@@ -117,6 +117,12 @@ export function incrementDay(date: IsoDate, step = 1): IsoDate {
     return getDatePart(dateObj);
 }
 
+export function incrementYear(date: IsoDate, value = 1): IsoDate {
+    const dateObj = new Date(date);
+    dateObj.setUTCFullYear(dateObj.getUTCFullYear() + value);
+    return getDatePart(dateObj);
+}
+
 export function decrementDay(date: IsoDate): IsoDate {
     return incrementDay(date, -1);
 }
@@ -126,12 +132,28 @@ export function getWeekDayName(weekDay: number) {
     return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][weekDay];
 }
 
-export function getMonthShortName(month: number) {
-    return [
-        "Jan", "Feb", "Mar", "Apr",
-        "May", "Jun", "Jul", "Aug",
-        "Sep", "Oct", "Nov", "Dec",
-    ][month - 1];
+const MONTH_SHORT_NAMES = [
+    "Jan", "Feb", "Mar", "Apr",
+    "May", "Jun", "Jul", "Aug",
+    "Sep", "Oct", "Nov", "Dec",
+] as const;
+
+export type MonthShortName = (typeof MONTH_SHORT_NAMES)[number];
+
+export function getMonthShortName(month: number): MonthShortName {
+    return MONTH_SHORT_NAMES[month - 1];
+}
+
+/** @return 1-12 */
+export function getMonthFromShortName(shortName: MonthShortName | string): number {
+    const index = MONTH_SHORT_NAMES
+        .map(cs => cs.toUpperCase())
+        .indexOf(shortName.toUpperCase());
+    if (index > -1) {
+        return index + 1;
+    } else {
+        throw new Error("Unexpected month short name: " + shortName);
+    }
 }
 
 export function getMonthFullName(month: number) {

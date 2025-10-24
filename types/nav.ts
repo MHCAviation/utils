@@ -17,7 +17,8 @@ export const CompanyName = (value: string): CompanyName => {
         value.toUpperCase() !== "AIR ATLANTA AVIA SERVICES" &&
         value.toUpperCase() !== "F2R" &&
         value.toUpperCase() !== "XF2R" &&
-        value.toUpperCase() !== "RECRUITMENT DATABASE"
+        value.toUpperCase() !== "RECRUITMENT DATABASE" &&
+        value.toUpperCase() !== "_TEST EUR"
     ) {
         throw new Error("Supplied COMPANYNAME has invalid format: " + value);
     }
